@@ -5,17 +5,21 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import * as story from '../Story';
 import { forEach } from 'lodash';
 import JQuery from 'jquery';
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
+import { Icon } from '@fluentui/react/lib/Icon';
+initializeIcons();
+const ChevronDownIcon = () => <Icon iconName="ChevronDown" />;
+const SearchIcon = () => <Icon iconName="Search" />;
 
 
 
 const inputStyle = {
-  fontFamily: "Sego UI, FontAwesome, sans-serif", 
-  placeholder: "Search by partner name  &#xF002"
+  fontFamily: "Sego UI, Arial, sans-serif", 
+  placeholder: "Search by partner name <SearchIcon />"
 };
 
-JQuery('.filters-dropdown  .activate').click(function(){
-  JQuery('.filters-dropdown .filters').toggleClass('show');
-});
+
+  
 
 export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}> {
   public render(): React.ReactElement<IStoryBrowserProps> {
@@ -24,17 +28,16 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
       isDarkTheme,
       environmentMessage,
       hasTeamsContext,
-      userDisplayName
-    } = this.props;
+      userDisplayName    } = this.props;
 
     let featuredStories: story.Story[];
     let otherStories: story.Story[];
-
+ 
     return (
-      <section id="storyBrowser">
+      <section id="storyBrowser" className={styles.storyBrowser}>
         <div id="filters">
           <div className={styles.filtersDropdown}>
-            <div className={styles.activate}>Filter your results <i className="fa fa-chevron-down"></i></div>
+            <div onClick={this.toggleFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
             <div className={styles.filters}>
                 <div>
                     <p className={styles.uncheck}>Uncheck All</p>
@@ -79,9 +82,9 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
               </div>
             </div>
           </div>
-          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> </div>
+          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
           <div className={styles.sortResults}>
-            <button className={styles.sortBtn}><span>Sort A-Z</span></button> 
+            <button className={styles.sortBtn}><span>Sort A-Z</span><ChevronDownIcon /></button> 
             <span>187 results</span>
           </div>
           {this.stories(featuredStories)}
@@ -133,6 +136,9 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     console.log('Leave me alone');
   }
 
+  public  toggleFilters(){
+    document.getElementById("filters").classList.toggle(styles.show);
+  }
   
 
 

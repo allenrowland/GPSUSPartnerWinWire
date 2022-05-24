@@ -5,5 +5,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     private stories;
     private storyCard;
     sayHello(): void;
+    toggleFilters(): void;
 }
 //# sourceMappingURL=StoryBrowser.d.ts.map

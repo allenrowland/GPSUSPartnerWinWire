@@ -1,15 +1,15 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
-
-.storyBrowser {
-  overflow: hidden;
-  padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
-  color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
-  }
+#storyBrowser{
+  display:flex;
 }
-
+.storyBrowser {
+  display:flex;
+}
+.storyBrowser input{
+  font-family:Segoe UI, Arial, sans-serif;
+  border:0px;
+  font-size:16px;
+}
 .welcome {
   text-align: center;
 }
@@ -34,7 +34,9 @@
 }
 
 
-
+#storyBrowser{
+  display:flex;
+}
 
 textarea:focus, input:focus{
 outline: none;
@@ -52,7 +54,7 @@ body{
   margin-top:30px;
   margin-bottom:30px;
 }
-#filters > div{
+#filters > .filters{
   border-bottom: 2px solid #0078D7;
   margin-right:20px;
   padding:10px 20px;
@@ -64,18 +66,25 @@ body{
   font-size:16px;
 
 }
+
 #filters input:focus{
   background:none;
 }
 .activate{
-  background: url(../assets/chevron.svg);
   background-repeat: no-repeat;
   background-position: right;
+  border-bottom: 2px solid #0078D7;
+  margin-right:20px;
+  padding:10px 20px;
+  max-width:100%;
 }
-.filters-search{
-  background: url(../assets/search.svg);
+.filtersSearch{
   background-repeat: no-repeat;
   background-position: right;
+  border-bottom: 2px solid #0078D7;
+  margin-right:20px;
+  padding:10px 20px;
+  max-width:100%;
 }
 #filters .filtersDropdown{
   width:320px;
@@ -98,7 +107,7 @@ display:none;
 left:0px;
 padding-bottom:40px;
 }
-.show{
+.show .filters{
   display:flex!important;
   animation: fadeIn .5s;
 -webkit-animation: fadeIn .5s;
@@ -169,7 +178,6 @@ margin-right:20px;
   font-family:Segoe UI, Arial, sans-serif;
 }
 .sortBtn{
-  background: url(../assets/chevron.svg);
   background-repeat: no-repeat;
   background-position: right;
    background-size:20px;
@@ -213,7 +221,7 @@ padding:20px;
   font-size:18px;
   margin-top:6px;
 }
-@media all and (max-width:800px){
+@media all and (max-width:700px){
 
   #filters div{
       width:80%!important;

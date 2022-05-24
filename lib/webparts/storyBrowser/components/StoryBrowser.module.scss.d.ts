@@ -1,17 +1,15 @@
 declare const styles: {
     storyBrowser: string;
-    teams: string;
     welcome: string;
     welcomeImage: string;
     links: string;
     filters: string;
     activate: string;
-    'filters-search': string;
+    filtersSearch: string;
     filtersDropdown: string;
     show: string;
     fadeIn: string;
     uncheck: string;
-    filtersSearch: string;
     featuredItems: string;
     sortResults: string;
     sortBtn: string;
