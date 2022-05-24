@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.14.0",
+    "libraryName": "gpsus-partner-win-stories",
+    "libraryId": "9fed5dec-50c8-4c0f-b7c3-2cc65d953a4c",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "GPSUSPartnerWinStories",
+    "solutionShortDescription": "GPSUSPartnerWinStories description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
