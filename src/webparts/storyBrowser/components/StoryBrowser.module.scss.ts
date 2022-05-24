@@ -1,21 +1,25 @@
 /* tslint:disable */
 require("./StoryBrowser.module.css");
 const styles = {
-  storyBrowser: 'storyBrowser_2c9294e6',
-  teams: 'teams_2c9294e6',
-  welcome: 'welcome_2c9294e6',
-  welcomeImage: 'welcomeImage_2c9294e6',
-  links: 'links_2c9294e6',
-  filters: 'filters_2c9294e6',
-  filtersDropdown: 'filtersDropdown_2c9294e6',
-  show: 'show_2c9294e6',
-  fadeIn: 'fadeIn_2c9294e6',
-  uncheck: 'uncheck_2c9294e6',
-  filtersSearch: 'filtersSearch_2c9294e6',
-  featuredItems: 'featuredItems_2c9294e6',
-  items: 'items_2c9294e6',
-  item: 'item_2c9294e6',
-  itemTitle: 'itemTitle_2c9294e6'
+  storyBrowser: 'storyBrowser_73dcf3ef',
+  teams: 'teams_73dcf3ef',
+  welcome: 'welcome_73dcf3ef',
+  welcomeImage: 'welcomeImage_73dcf3ef',
+  links: 'links_73dcf3ef',
+  filters: 'filters_73dcf3ef',
+  activate: 'activate_73dcf3ef',
+  'filters-search': 'filters-search_73dcf3ef',
+  filtersDropdown: 'filtersDropdown_73dcf3ef',
+  show: 'show_73dcf3ef',
+  fadeIn: 'fadeIn_73dcf3ef',
+  uncheck: 'uncheck_73dcf3ef',
+  filtersSearch: 'filtersSearch_73dcf3ef',
+  featuredItems: 'featuredItems_73dcf3ef',
+  'sort-results': 'sort-results_73dcf3ef',
+  sortBtn: 'sortBtn_73dcf3ef',
+  items: 'items_73dcf3ef',
+  item: 'item_73dcf3ef',
+  itemTitle: 'itemTitle_73dcf3ef'
 };
 
 export default styles;
