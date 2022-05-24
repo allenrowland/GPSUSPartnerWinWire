@@ -32,51 +32,58 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
 
     return (
       <section id="storyBrowser">
-        <div className="filtersDropdown"><div className="activate">Filter your results <i className="fa fa-chevron-down"></i></div>
-          <div className="filters">
-              <div>
-                  <p className="uncheck">Uncheck All</p>
-                    <strong>Industry:</strong>
-                    <ul>
-                        <li><input type="checkbox" value="" checked /> Automotive</li>
-                        <li><input type="checkbox" value="" checked /> Education</li>
-                        <li><input type="checkbox" value="" checked /> Energy</li>
-                        <li><input type="checkbox" value="" checked /> Financial Services</li>
-                        <li><input type="checkbox" value="" checked /> Government</li>
-                    </ul>
-                    <br />
-                    <strong>Solution area:</strong>
-                    <ul>
-                        <li><input type="checkbox" value="" checked /> Azure Apps and Infra</li>
-                        <li><input type="checkbox" value="" checked /> Azure Data &amp; AI</li>
-                        <li><input type="checkbox" value="" checked /> Modern Work (M365 + Surface)</li>
-                        <li><input type="checkbox" value="" checked /> Security (Azure + M365) Business Apps</li>
-                        <li><input type="checkbox" value="" checked /> (Dynamics + Power Platform)</li>
-                        <li><input type="checkbox" value="" checked /> Surface</li>
-                    </ul>
-                </div>  
-                <div><strong>Partner Type:</strong>
-                    <ul>
-                        <li><input type="checkbox" value="" checked /> ISV</li>
-                        <li><input type="checkbox" value="" checked /> Services</li>
-                        <li><input type="checkbox" value="" checked /> Other</li>
-                     
-                    </ul>   <br />
-                    <strong>Story Type:</strong>
-                    <ul>
-                        <li><input type="checkbox" value="" checked /> Internal Win Wire</li>
-                        <li><input type="checkbox" value="" checked /> External Case Study</li>                   
-                     
-                    </ul>   <br />
-                    <strong>Keyword/tag filter:</strong>
-                    <ul>
-                        <li><input type="checkbox" value="" checked /> Compete</li>
-                        <li><input type="checkbox" value="" checked /> Marketplace</li>                  
-                    </ul>
-                </div>
+        <div id="filters">
+          <div className={styles.filtersDropdown}>
+            <div className={styles.activate}>Filter your results <i className="fa fa-chevron-down"></i></div>
+            <div className={styles.filters}>
+                <div>
+                    <p className={styles.uncheck}>Uncheck All</p>
+                      <strong>Industry:</strong>
+                      <ul>
+                          <li><input type="checkbox" value="" checked /> Automotive</li>
+                          <li><input type="checkbox" value="" checked /> Education</li>
+                          <li><input type="checkbox" value="" checked /> Energy</li>
+                          <li><input type="checkbox" value="" checked /> Financial Services</li>
+                          <li><input type="checkbox" value="" checked /> Government</li>
+                      </ul>
+                      <br />
+                      <strong>Solution area:</strong>
+                      <ul>
+                          <li><input type="checkbox" value="" checked /> Azure Apps and Infra</li>
+                          <li><input type="checkbox" value="" checked /> Azure Data &amp; AI</li>
+                          <li><input type="checkbox" value="" checked /> Modern Work (M365 + Surface)</li>
+                          <li><input type="checkbox" value="" checked /> Security (Azure + M365) Business Apps</li>
+                          <li><input type="checkbox" value="" checked /> (Dynamics + Power Platform)</li>
+                          <li><input type="checkbox" value="" checked /> Surface</li>
+                      </ul>
+                  </div>  
+                  <div><strong>Partner Type:</strong>
+                      <ul>
+                          <li><input type="checkbox" value="" checked /> ISV</li>
+                          <li><input type="checkbox" value="" checked /> Services</li>
+                          <li><input type="checkbox" value="" checked /> Other</li>
+                      
+                      </ul>   <br />
+                      <strong>Story Type:</strong>
+                      <ul>
+                          <li><input type="checkbox" value="" checked /> Internal Win Wire</li>
+                          <li><input type="checkbox" value="" checked /> External Case Study</li>                   
+                      
+                      </ul>   <br />
+                      <strong>Keyword/tag filter:</strong>
+                      <ul>
+                          <li><input type="checkbox" value="" checked /> Compete</li>
+                          <li><input type="checkbox" value="" checked /> Marketplace</li>                  
+                      </ul>
+                  </div>
+              </div>
             </div>
           </div>
-          <div className="filtersSearch"><input style={inputStyle} type="text" name="namesearch" /> </div>
+          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> </div>
+          <div className={styles.sortResults}>
+            <button className={styles.sortBtn}><span>Sort A-Z</span></button> 
+            <span>187 results</span>
+          </div>
           {this.stories(featuredStories)}
           {this.stories(otherStories)}
       </section>
@@ -94,14 +101,14 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
         {featured ? (    
           <div id="featuredItems">
             <h4>Featured</h4>
-            <div className="items">
+            <div className={styles.items}>
             {items.map((value, index) => {
               return this.storyCard(value);
             })}              
           </div>
           </div>
         ) : (  
-          <div className="items">
+          <div className={styles.items}>
           </div>
         )}
       </div>
@@ -110,7 +117,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
 
   private storyCard(item: story.Story): React.ReactElement{
     return(
-      <div className="item">
+      <div className={styles.item}>
         <img src="https://via.placeholder.com/320x179" alt=""/>
         <a className="itemTitle" href="${item.URL}">{item.Title}</a>
         <p className="itemDate"><strong>{story.GSPUSHelper._formatDate(item.PublishDate)}</strong></p>

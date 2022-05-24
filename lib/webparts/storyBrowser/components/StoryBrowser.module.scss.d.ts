@@ -5,12 +5,16 @@ declare const styles: {
     welcomeImage: string;
     links: string;
     filters: string;
+    activate: string;
+    'filters-search': string;
     filtersDropdown: string;
     show: string;
     fadeIn: string;
     uncheck: string;
     filtersSearch: string;
     featuredItems: string;
+    sortResults: string;
+    sortBtn: string;
     items: string;
     item: string;
     itemTitle: string;
