@@ -1,7 +1,5 @@
+import * as story from '../../Story';
+
 export interface IStoryBrowserProps {
-  description: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
-  userDisplayName: string;
+  stories: story.Story[];
 }

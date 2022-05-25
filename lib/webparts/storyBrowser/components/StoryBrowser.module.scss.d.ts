@@ -6,12 +6,11 @@ declare const styles: {
     links: string;
     filters: string;
     activate: string;
-    'filters-search': string;
+    filtersSearch: string;
     filtersDropdown: string;
     show: string;
     fadeIn: string;
     uncheck: string;
-    filtersSearch: string;
     featuredItems: string;
     sortResults: string;
     sortBtn: string;

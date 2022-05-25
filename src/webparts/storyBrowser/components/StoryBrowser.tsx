@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './StoryBrowser.module.scss';
 import { IStoryBrowserProps } from './IStoryBrowserProps';
 import { escape } from '@microsoft/sp-lodash-subset';
-import * as story from '../Story';
+import * as story from '../../Story';
 import { forEach } from 'lodash';
 import JQuery from 'jquery';
 
@@ -13,22 +13,16 @@ const inputStyle = {
   placeholder: "Search by partner name  &#xF002"
 };
 
-JQuery('.filters-dropdown  .activate').click(function(){
-  JQuery('.filters-dropdown .filters').toggleClass('show');
-});
-
 export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}> {
   public render(): React.ReactElement<IStoryBrowserProps> {
     const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
+      stories
     } = this.props;
+    console.log('yay');
+    console.log(stories);
 
-    let featuredStories: story.Story[];
-    let otherStories: story.Story[];
+    let featuredStories: story.Story[] = this.props.stories;
+    let otherStories: story.Story[] = this.props.stories;;
 
     return (
       <section id="storyBrowser">
@@ -84,8 +78,9 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
             <button className={styles.sortBtn}><span>Sort A-Z</span></button> 
             <span>187 results</span>
           </div>
-          {this.stories(featuredStories)}
+          {this.stories(featuredStories, true)}
           {this.stories(otherStories)}
+
       </section>
     );
   }
@@ -95,7 +90,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     if(items == null || items.length < 1){
       return (null);
     }
-  
     return(
       <div>
         {featured ? (    
@@ -109,6 +103,9 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
           </div>
         ) : (  
           <div className={styles.items}>
+          {items.map((value, index) => {
+            return this.storyCard(value);
+          })} 
           </div>
         )}
       </div>
@@ -120,20 +117,14 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
       <div className={styles.item}>
         <img src="https://via.placeholder.com/320x179" alt=""/>
         <a className="itemTitle" href="${item.URL}">{item.Title}</a>
-        <p className="itemDate"><strong>{story.GSPUSHelper._formatDate(item.PublishDate)}</strong></p>
-        <p className="itemPartner">PARTNER: {story.GSPUSHelper._listAll(item.Partner)}</p>
-        <p className="itemIndusty">INDUSTRY: {story.GSPUSHelper._listAll(item.Industry)}</p>
-        <p className="itemSolution">SOLUTION: {story.GSPUSHelper._listAll(item.SolutionArea)}</p>
+        <p className="itemDate"><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
+        <p className="itemPartner">PARTNER: {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
+        <p className="itemIndusty">INDUSTRY: {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
+        <p className="itemSolution">SOLUTION: {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
         <p className="itemType">STORY TYPE: {item.StoryType}</p>
       </div>
     );
-  }
-
-  public sayHello(){
-    console.log('Leave me alone');
-  }
-
-  
+  } 
 
 
 }
