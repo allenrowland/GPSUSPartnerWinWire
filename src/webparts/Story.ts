@@ -1,3 +1,4 @@
+import { Guid } from "@microsoft/sp-core-library";
 import { forEach, result } from "lodash";
 import * as moment from 'moment';
 
@@ -33,6 +34,11 @@ export interface Story
     Element: string
   };
   Featured :string;
+}
+export interface SPList
+{
+  Title: string;
+  ID: string;
 }
 
 

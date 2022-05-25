@@ -28,6 +28,10 @@ export interface Story {
     };
     Featured: string;
 }
+export interface SPList {
+    Title: string;
+    ID: string;
+}
 export declare class GSPUSStoryHelper {
     static _listAll(items: object, spacer?: string): string;
     static _formatDate(date: Date): string;

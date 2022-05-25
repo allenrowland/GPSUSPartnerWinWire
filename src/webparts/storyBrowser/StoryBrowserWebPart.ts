@@ -5,6 +5,8 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneButton,
   PropertyPaneButtonType,
+  PropertyPaneDropdown,
+  IPropertyPaneDropdownOption,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
@@ -37,6 +39,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   private _partnerTypeFilters: string[];
   private _solutionAreaFilters: string[];
   private _storyTypeFilters: string[];
+  private _lists: IPropertyPaneDropdownOption[];
 
   protected onInit(): Promise<void> {
 
@@ -44,35 +47,36 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   }
 
   public render(): void {
-    //Get User Permissions
-    this._getInteralUser().then(internalPermission =>{
-      this.isInternal = internalPermission as boolean;
-      console.log('hi');
+      //Get all Lists for configuration
+      this.getLists().then(listResolve =>{
+      this._lists = listResolve as IPropertyPaneDropdownOption[];
       
-      //Get Filter Choices
-      this._getfieldChoices().then((fieldResponse) => {
-        console.log(this._industryFilters);
+      //Get User Permissions
+      this._getInteralUser().then(internalPermission =>{
+        this.isInternal = internalPermission as boolean;
+        
+        //Get Filter Choices
+        this._getfieldChoices().then((fieldResponse) => {
 
-        //Get Initial List
-        this._getSearchData().then(response => {
-          console.log('hi2');
-          this._stories = response as story.Story[];
-          
-          const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
-            stories: this._stories,
-            tagsFilters: this._tagsFilters,
-            industryFilters: this._industryFilters,
-            partnerTypeFilters: this._partnerTypeFilters,
-            solutionAreaFilters: this._solutionAreaFilters,
-            storyTypeFilters: this._storyTypeFilters
-          });
-          ReactDom.render(element, this.domElement);
-      });
-    });
-
-      return true;
-    })
-    .catch(err => console.log('There was an error:' + err));
+          //Get Initial List
+          this._getSearchData().then(response => {
+            this._stories = response as story.Story[];
+            
+            const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
+              stories: this._stories,
+              tagsFilters: this._tagsFilters,
+              industryFilters: this._industryFilters,
+              partnerTypeFilters: this._partnerTypeFilters,
+              solutionAreaFilters: this._solutionAreaFilters,
+              storyTypeFilters: this._storyTypeFilters
+            });
+            ReactDom.render(element, this.domElement);
+            })
+          })
+          return true;
+        });
+      });     
+      
   }
 
   protected onDispose(): void {
@@ -93,17 +97,11 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
           groups: [
             {
               groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneButton('ClickHere',  
-                {  
-                 text: "ClickHere",  
-                 buttonType: PropertyPaneButtonType.Normal,  
-                 onClick: this.onPropertyPaneFieldChanged.bind(this)  
-                }), 
-                PropertyPaneTextField('ListGUID', {
-                  label: 'List ID (GUID)',
-                  value: strings.ListGUID,
-                  
+              groupFields: [ 
+                PropertyPaneDropdown('ListGUID', {
+                  label:'List ID (GUID)',
+                  options: this._lists,
+                  selectedKey: this.properties.ListGUID
                 })
               ]
             }
@@ -113,18 +111,24 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     };
   }
 
-  protected onPropertyPaneFieldChanged(propertyPath: string, oldValue: any, newValue: any): void {
-    if (propertyPath === 'ListGUID' && newValue) {
-      // push new list value
-      super.onPropertyPaneFieldChanged(propertyPath, oldValue, newValue);
-      // refresh the item selector control by repainting the property pane
-      this.context.propertyPane.refresh();
-      // re-render the web part as clearing the loading indicator removes the web part body
-      this.render();      
-    }
-    else {
-      super.onPropertyPaneFieldChanged(propertyPath, oldValue, oldValue);
-    }
+  private getLists(){
+    sp.setup({
+      spfxContext: this.context
+    });    
+    return new Promise((resolve) => {
+      sp.web.lists.get().then(result =>{   
+        let options :IPropertyPaneDropdownOption[] = [];
+        result.forEach(item =>{
+          let option :IPropertyPaneDropdownOption = {
+            key: item.Id,
+            text: item.Title
+          }
+
+          options.push(option);
+        })
+        resolve(options);
+      });
+    });
   }
 
 
@@ -137,7 +141,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     });    
 
     return new Promise((resolve) => {
-      let list = sp.web.lists.getById('f5b9c35f-13e1-4444-bb9a-5a5556159c16');
+      let list = sp.web.lists.getById(this.properties.ListGUID);
       
       let tags = list.fields.getByInternalNameOrTitle('Tags');
       tags.select('Choices').get().then((tgoptions) => {  
@@ -170,29 +174,46 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   }
 
   
-  private _getSearchData(Industry: string = "")
+  private _getSearchData(keyword: string = 'Accenture', sort: number = 0)
   {
     sp.setup({
       spfxContext: this.context
-    });    
+    });  
 
+    let searchURI = '?InplaceSearchQuery=' + encodeURIComponent(keyword);    
+    let sortURI = '&SortField=PublishDate&SortDir=Desc';
+
+    if(sort == 1){
+      sortURI = '&SortField=Title&SortDir=Asc'
+    }
+    
     return new Promise((resolve) => {
-        sp.web.lists.getById('f5b9c35f-13e1-4444-bb9a-5a5556159c16').renderListDataAsStream(
-        {
-          ViewXml: `
+      const restAPI = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists(guid'${this.properties.ListGUID}')/RenderListDataAsStream` +searchURI + sortURI;
+      
+      return this.context.spHttpClient.post(restAPI, SPHttpClient.configurations.v1, {
+        body: JSON.stringify({
+          parameters: {          
+            ViewXml: `
               <View>
                 <RowLimit Paged="TRUE">5000</RowLimit>
-              </View>`,
-        }).then(items => {
-          
-          let filteredResults = items.Row;
-          if(!this.isInternal){  
-            //USER DOES NOT HAVE PERMISSION TO VIEW INTERNAL STORIES        
-            filteredResults = filteredResults.filter(item => item['StoryType'] == 'External Case Study');
+              </View>
+            `
           }
-          resolve(JSON.parse(JSON.stringify(filteredResults)));
-  
-        });
+        })
+      })
+      .then((response: SPHttpClientResponse) => 
+         {
+          response.json().then(items => {
+          
+            let filteredResults = items.Row;
+            if(!this.isInternal){  
+              //USER DOES NOT HAVE PERMISSION TO VIEW INTERNAL STORIES        
+              filteredResults = filteredResults.filter(item => item['StoryType'] == 'External Case Study');
+            }
+            resolve(JSON.parse(JSON.stringify(filteredResults)));
+
+          })
+         });
 
     });
   }

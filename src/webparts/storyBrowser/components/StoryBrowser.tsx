@@ -29,9 +29,12 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     } = this.props;
 
     console.log(this.props.stories);
-
-    let featuredStories: story.Story[] = this.props.stories.filter(item => item.Featured == "Yes");
-    let otherStories: story.Story[] = this.props.stories.filter(item => item.Featured != "Yes");
+    //UNCOMMENT FOR PRODUCTION
+    //let featuredStories: story.Story[] = this.props.stories.filter(item => item.Featured == "Yes");
+    //let otherStories: story.Story[] = this.props.stories.filter(item => item.Featured != "Yes");
+    
+    let featuredStories: story.Story[] = this.props.stories;
+    let otherStories: story.Story[] = this.props.stories;
 
     return (
       <section id="storyBrowser" className={styles.storyBrowser}>

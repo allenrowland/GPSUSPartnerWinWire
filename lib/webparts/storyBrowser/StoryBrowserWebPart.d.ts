@@ -12,12 +12,13 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     private _partnerTypeFilters;
     private _solutionAreaFilters;
     private _storyTypeFilters;
+    private _lists;
     protected onInit(): Promise<void>;
     render(): void;
     protected onDispose(): void;
     protected get dataVersion(): Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
-    protected onPropertyPaneFieldChanged(propertyPath: string, oldValue: any, newValue: any): void;
+    private getLists;
     private isInternal;
     private _getfieldChoices;
     private _getSearchData;
