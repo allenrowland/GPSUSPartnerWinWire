@@ -2,39 +2,13 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
     "name": "gpsus-partner-win-stories-client-side-solution",
-    "id": "9fed5dec-50c8-4c0f-b7c3-2cc65d953a4c",
+    "id": "fd82a395-e968-65af-ba0a-36c4051fa5ca",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
-    "isDomainIsolated": false,
-    "developer": {
-      "name": "",
-      "websiteUrl": "",
-      "privacyUrl": "",
-      "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.14.0"
-    },
-    "metadata": {
-      "shortDescription": {
-        "default": "GPSUSPartnerWinStories description"
-      },
-      "longDescription": {
-        "default": "GPSUSPartnerWinStories description"
-      },
-      "screenshotPaths": [],
-      "videoUrl": "",
-      "categories": []
-    },
-    "features": [
-      {
-        "title": "gpsus-partner-win-stories Feature",
-        "description": "The feature that activates elements of the gpsus-partner-win-stories solution.",
-        "id": "765eb45c-6424-41a3-8689-390e0452c64e",
-        "version": "1.0.0.0"
-      }
-    ]
+    "isDomainIsolated": false
   },
   "paths": {
-    "zippedPackage": "solution/gpsus-partner-win-stories.sppkg"
+    "zippedPackage": "solution/gpsus-winstories.sppkg"
   }
 }

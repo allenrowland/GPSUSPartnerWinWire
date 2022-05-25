@@ -26,7 +26,7 @@ export interface Story {
     Tags: {
         Element: string;
     };
-    Featured: Boolean;
+    Featured: string;
 }
 export declare class GSPUSStoryHelper {
     static _listAll(items: object, spacer?: string): string;

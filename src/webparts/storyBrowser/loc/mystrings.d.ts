@@ -6,6 +6,7 @@ declare interface IStoryBrowserWebPartStrings {
   AppLocalEnvironmentTeams: string;
   AppSharePointEnvironment: string;
   AppTeamsTabEnvironment: string;
+  ListGUID: string;
 }
 
 declare module 'StoryBrowserWebPartStrings' {

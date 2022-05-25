@@ -14,15 +14,16 @@
   "requiresCustomScript": false,
   "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
   "supportsThemeVariants": true,
+  "supportsFullBleed": true,
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "StoryBrowser" },
-    "description": { "default": "StoryBrowser description" },
+    "title": { "default": "Story Browser" },
+    "description": { "default": "A searchable, filterable, and sortable set of win wire stories." },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "StoryBrowser"
+      "description": "Story Browser"
     }
   }]
 }

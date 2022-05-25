@@ -85,8 +85,8 @@ body{
   position:relative;
 }
 .filtersDropdown .filters{
-  position:absolute;
-  display:flex;
+  //position:absolute;
+  //display:flex;
   flex-direction:row;
   background:#FFF;
   top:155%;
@@ -94,7 +94,7 @@ body{
   padding:20px;
   -webkit-box-shadow: 1px 5px 10px 1px rgba(0,0,0,0.4); 
 box-shadow: 1px 5px 10px 1px rgba(0,0,0,0.4);
-display:none;
+//display:none;
 left:0px;
 padding-bottom:40px;
 }

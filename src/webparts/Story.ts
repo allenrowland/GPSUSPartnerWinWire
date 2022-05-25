@@ -32,7 +32,7 @@ export interface Story
   Tags :{
     Element: string
   };
-  Featured :Boolean;
+  Featured :string;
 }
 
 

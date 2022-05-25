@@ -13,11 +13,18 @@ const inputStyle = {
 export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}> {
   public render(): React.ReactElement<IStoryBrowserProps> {
     const {
-      stories
+      stories,
+      tagsFilters,
+      industryFilters,
+      partnerTypeFilters,
+      solutionAreaFilters,
+      storyTypeFilters
     } = this.props;
 
-    let featuredStories: story.Story[] = this.props.stories;
-    let otherStories: story.Story[] = this.props.stories;;
+    console.log(this.props.stories);
+
+    let featuredStories: story.Story[] = this.props.stories.filter(item => item.Featured == "Yes");
+    let otherStories: story.Story[] = this.props.stories.filter(item => item.Featured != "Yes");
 
     return (
       <section id="storyBrowser">
@@ -29,40 +36,35 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
                     <p className={styles.uncheck}>Uncheck All</p>
                       <strong>Industry:</strong>
                       <ul>
-                          <li><input type="checkbox" value="" checked /> Automotive</li>
-                          <li><input type="checkbox" value="" checked /> Education</li>
-                          <li><input type="checkbox" value="" checked /> Energy</li>
-                          <li><input type="checkbox" value="" checked /> Financial Services</li>
-                          <li><input type="checkbox" value="" checked /> Government</li>
+                        {this.props.industryFilters.map((value, index) =>{
+                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        })}
                       </ul>
                       <br />
                       <strong>Solution area:</strong>
                       <ul>
-                          <li><input type="checkbox" value="" checked /> Azure Apps and Infra</li>
-                          <li><input type="checkbox" value="" checked /> Azure Data &amp; AI</li>
-                          <li><input type="checkbox" value="" checked /> Modern Work (M365 + Surface)</li>
-                          <li><input type="checkbox" value="" checked /> Security (Azure + M365) Business Apps</li>
-                          <li><input type="checkbox" value="" checked /> (Dynamics + Power Platform)</li>
-                          <li><input type="checkbox" value="" checked /> Surface</li>
+                        {this.props.solutionAreaFilters.map((value, index) =>{
+                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        })}
                       </ul>
                   </div>  
                   <div><strong>Partner Type:</strong>
-                      <ul>
-                          <li><input type="checkbox" value="" checked /> ISV</li>
-                          <li><input type="checkbox" value="" checked /> Services</li>
-                          <li><input type="checkbox" value="" checked /> Other</li>
-                      
+                      <ul>                          
+                        {this.props.partnerTypeFilters.map((value, index) =>{
+                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        })}                   
                       </ul>   <br />
                       <strong>Story Type:</strong>
                       <ul>
-                          <li><input type="checkbox" value="" checked /> Internal Win Wire</li>
-                          <li><input type="checkbox" value="" checked /> External Case Study</li>                   
-                      
+                        {this.props.storyTypeFilters.map((value, index) =>{
+                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        })}                    
                       </ul>   <br />
                       <strong>Keyword/tag filter:</strong>
                       <ul>
-                          <li><input type="checkbox" value="" checked /> Compete</li>
-                          <li><input type="checkbox" value="" checked /> Marketplace</li>                  
+                        {this.props.tagsFilters.map((value, index) =>{
+                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        })}             
                       </ul>
                   </div>
               </div>
@@ -71,7 +73,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
           <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> </div>
           <div className={styles.sortResults}>
             <button className={styles.sortBtn}><span>Sort A-Z</span></button> 
-            <span>187 results</span>
+            <span>{story.GSPUSStoryHelper._resultCount(this.props.stories)}</span>
           </div>
           {this.stories(featuredStories, true)}
           {this.stories(otherStories)}
