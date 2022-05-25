@@ -40,7 +40,6 @@ export class GSPUSStoryHelper {
     
 
     public static _listAll(items: object, spacer: string = ', '): string{
-        console.log(items);
         let res :string = '';
         let i :number = 0;
         if(items != null){

@@ -1,24 +1,23 @@
 /* tslint:disable */
 require("./StoryBrowser.module.css");
 const styles = {
-  storyBrowser: 'storyBrowser_f6f960fe',
-  teams: 'teams_f6f960fe',
-  welcome: 'welcome_f6f960fe',
-  welcomeImage: 'welcomeImage_f6f960fe',
-  links: 'links_f6f960fe',
-  filters: 'filters_f6f960fe',
-  activate: 'activate_f6f960fe',
-  filtersSearch: 'filtersSearch_f6f960fe',
-  filtersDropdown: 'filtersDropdown_f6f960fe',
-  show: 'show_f6f960fe',
-  fadeIn: 'fadeIn_f6f960fe',
-  uncheck: 'uncheck_f6f960fe',
-  featuredItems: 'featuredItems_f6f960fe',
-  sortResults: 'sortResults_f6f960fe',
-  sortBtn: 'sortBtn_f6f960fe',
-  items: 'items_f6f960fe',
-  item: 'item_f6f960fe',
-  itemTitle: 'itemTitle_f6f960fe'
+  storyBrowser: 'storyBrowser_6159a5e9',
+  welcome: 'welcome_6159a5e9',
+  welcomeImage: 'welcomeImage_6159a5e9',
+  links: 'links_6159a5e9',
+  filters: 'filters_6159a5e9',
+  activate: 'activate_6159a5e9',
+  filtersSearch: 'filtersSearch_6159a5e9',
+  filtersDropdown: 'filtersDropdown_6159a5e9',
+  show: 'show_6159a5e9',
+  fadeIn: 'fadeIn_6159a5e9',
+  uncheck: 'uncheck_6159a5e9',
+  featuredItems: 'featuredItems_6159a5e9',
+  sortResults: 'sortResults_6159a5e9',
+  sortBtn: 'sortBtn_6159a5e9',
+  items: 'items_6159a5e9',
+  item: 'item_6159a5e9',
+  itemTitle: 'itemTitle_6159a5e9'
 };
 
 export default styles;

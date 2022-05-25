@@ -1,8 +1,7 @@
 import * as React from 'react';
 import styles from './StoryBrowser.module.scss';
 import { IStoryBrowserProps } from './IStoryBrowserProps';
-import { escape } from '@microsoft/sp-lodash-subset';
-import * as story from '../Story';
+import * as story from '../../Story';
 import { forEach } from 'lodash';
 import JQuery from 'jquery';
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
@@ -14,7 +13,7 @@ const SearchIcon = () => <Icon iconName="Search" />;
 
 
 const inputStyle = {
-  fontFamily: "Sego UI, Arial, sans-serif",
+  fontFamily: "Segoe UI, Arial, sans-serif",
   placeholder: "Search by partner name <SearchIcon />"
 };
 
@@ -129,10 +128,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
         <p className="itemType">STORY TYPE: {item.StoryType}</p>
       </div>
     );
-  }
-
-  public sayHello(){
-    console.log('Leave me alone');
   }
 
   public  toggleFilters(){

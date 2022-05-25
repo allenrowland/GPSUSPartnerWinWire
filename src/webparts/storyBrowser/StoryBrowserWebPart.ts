@@ -20,8 +20,6 @@ import {
   SPHttpClient,
   SPHttpClientResponse   
 } from '@microsoft/sp-http';
-import { filteredAssign, transitionKeysAreEqual } from 'office-ui-fabric-react';
-import { filter, reject } from 'lodash';
 
 export interface IStoryBrowserWebPartProps {
   description: string;
@@ -139,7 +137,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     });    
 
     return new Promise((resolve) => {
-      let list = sp.web.lists.getById(this.properties.ListGUID);
+      let list = sp.web.lists.getById('f5b9c35f-13e1-4444-bb9a-5a5556159c16');
       
       let tags = list.fields.getByInternalNameOrTitle('Tags');
       tags.select('Choices').get().then((tgoptions) => {  
@@ -179,7 +177,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     });    
 
     return new Promise((resolve) => {
-        sp.web.lists.getById(this.properties.ListGUID).renderListDataAsStream(
+        sp.web.lists.getById('f5b9c35f-13e1-4444-bb9a-5a5556159c16').renderListDataAsStream(
         {
           ViewXml: `
               <View>
