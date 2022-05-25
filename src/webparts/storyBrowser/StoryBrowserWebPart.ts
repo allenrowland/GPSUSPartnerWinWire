@@ -26,6 +26,7 @@ export interface IStoryBrowserWebPartProps {
 }
 
 import { sp } from "@pnp/sp/presets/all";  
+import { useControlledState } from 'office-ui-fabric-react/lib/Foundation';
 
 export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBrowserWebPartProps> {
 
@@ -74,12 +75,54 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   
   private isInternal :boolean = false;
 
+  private _setfieldChoices(){
+    sp.setup({
+      spfxContext: this.context
+    });    
+
+    let list = sp.web.lists.getById('f5b9c35f-13e1-4444-bb9a-5a5556159c16');
+    
+    let tags = list.fields.getByInternalNameOrTitle('Tags');
+    tags.select('Choices').get().then((options) => {  
+      //RENDER FILTERS
+      console.log(options['Choices']); 
+    });
+    
+    let industry = list.fields.getByInternalNameOrTitle('Industry');
+    industry.select('Choices').get().then((options) => {  
+      //RENDER FILTERS
+      console.log(options['Choices']); 
+    });
+    
+    let partnerType = list.fields.getByInternalNameOrTitle('PartnerType');
+    partnerType.select('Choices').get().then((options) => {  
+      //RENDER FILTERS
+      console.log(options['Choices']); 
+    });
+    
+    let solutionArea = list.fields.getByInternalNameOrTitle('SolutionArea');
+    solutionArea.select('Choices').get().then((options) => {  
+      //RENDER FILTERS
+      console.log(options['Choices']); 
+    });
+    
+    let storyType = list.fields.getByInternalNameOrTitle('StoryType');
+    storyType.select('Choices').get().then((options) => {  
+      //RENDER FILTERS
+      console.log(options['Choices']); 
+    });
+
+  }
+
   
   private async _getSearchData(Industry: string = ""): Promise<story.Story[]>
   {
     sp.setup({
       spfxContext: this.context
     });
+
+    this._setfieldChoices();
+
     return sp.web.lists.getById('f5b9c35f-13e1-4444-bb9a-5a5556159c16').renderListDataAsStream(
       {
         ViewXml: `
@@ -87,6 +130,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
               <RowLimit Paged="TRUE">5000</RowLimit>
             </View>`,
       }).then(items => {
+        
         let filteredResults = items.Row;
         if(!this.isInternal){  
           //USER DOES NOT HAVE PERMISSION TO VIEW INTERNAL STORIES        

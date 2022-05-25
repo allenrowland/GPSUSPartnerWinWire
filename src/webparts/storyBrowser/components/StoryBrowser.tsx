@@ -1,10 +1,7 @@
 import * as React from 'react';
 import styles from './StoryBrowser.module.scss';
 import { IStoryBrowserProps } from './IStoryBrowserProps';
-import { escape } from '@microsoft/sp-lodash-subset';
 import * as story from '../../Story';
-import { forEach } from 'lodash';
-import JQuery from 'jquery';
 
 
 
@@ -18,8 +15,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     const {
       stories
     } = this.props;
-    console.log('yay');
-    console.log(stories);
 
     let featuredStories: story.Story[] = this.props.stories;
     let otherStories: story.Story[] = this.props.stories;;

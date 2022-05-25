@@ -12,6 +12,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     protected get dataVersion(): Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
     private isInternal;
+    private _setfieldChoices;
     private _getSearchData;
     private _setInteralUserAsync;
 }
