@@ -1,13 +1,21 @@
 import * as React from 'react';
 import styles from './StoryBrowser.module.scss';
 import { IStoryBrowserProps } from './IStoryBrowserProps';
-import * as story from '../../Story';
+import { escape } from '@microsoft/sp-lodash-subset';
+import * as story from '../Story';
+import { forEach } from 'lodash';
+import JQuery from 'jquery';
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
+import { Icon } from '@fluentui/react/lib/Icon';
+initializeIcons();
+const ChevronDownIcon = () => <Icon iconName="ChevronDown" />;
+const SearchIcon = () => <Icon iconName="Search" />;
 
 
 
 const inputStyle = {
-  fontFamily: "Sego UI, FontAwesome, sans-serif", 
-  placeholder: "Search by partner name  &#xF002"
+  fontFamily: "Sego UI, Arial, sans-serif",
+  placeholder: "Search by partner name <SearchIcon />"
 };
 
 export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}> {
@@ -27,10 +35,10 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     let otherStories: story.Story[] = this.props.stories.filter(item => item.Featured != "Yes");
 
     return (
-      <section id="storyBrowser">
+      <section id="storyBrowser" className={styles.storyBrowser}>
         <div id="filters">
           <div className={styles.filtersDropdown}>
-            <div className={styles.activate}>Filter your results <i className="fa fa-chevron-down"></i></div>
+            <div onClick={this.toggleFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
             <div className={styles.filters}>
                 <div>
                     <p className={styles.uncheck}>Uncheck All</p>
@@ -47,32 +55,32 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
                           return <li><input type="checkbox" value="" checked /> {value}</li>;
                         })}
                       </ul>
-                  </div>  
+                  </div>
                   <div><strong>Partner Type:</strong>
-                      <ul>                          
+                      <ul>
                         {this.props.partnerTypeFilters.map((value, index) =>{
                           return <li><input type="checkbox" value="" checked /> {value}</li>;
-                        })}                   
+                        })}
                       </ul>   <br />
                       <strong>Story Type:</strong>
                       <ul>
                         {this.props.storyTypeFilters.map((value, index) =>{
                           return <li><input type="checkbox" value="" checked /> {value}</li>;
-                        })}                    
+                        })}
                       </ul>   <br />
                       <strong>Keyword/tag filter:</strong>
                       <ul>
                         {this.props.tagsFilters.map((value, index) =>{
                           return <li><input type="checkbox" value="" checked /> {value}</li>;
-                        })}             
+                        })}
                       </ul>
                   </div>
               </div>
             </div>
           </div>
-          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> </div>
+          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
           <div className={styles.sortResults}>
-            <button className={styles.sortBtn}><span>Sort A-Z</span></button> 
+            <button className={styles.sortBtn}><span>Sort A-Z</span></button>
             <span>{story.GSPUSStoryHelper._resultCount(this.props.stories)}</span>
           </div>
           {this.stories(featuredStories, true)}
@@ -89,24 +97,24 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     }
     return(
       <div>
-        {featured ? (    
+        {featured ? (
           <div id="featuredItems">
             <h4>Featured</h4>
             <div className={styles.items}>
             {items.map((value, index) => {
               return this.storyCard(value);
-            })}              
+            })}
           </div>
           </div>
-        ) : (  
+        ) : (
           <div className={styles.items}>
           {items.map((value, index) => {
             return this.storyCard(value);
-          })} 
+          })}
           </div>
         )}
       </div>
-    );  
+    );
   }
 
   private storyCard(item: story.Story): React.ReactElement{
@@ -121,8 +129,16 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
         <p className="itemType">STORY TYPE: {item.StoryType}</p>
       </div>
     );
-  } 
+  }
+
+  public sayHello(){
+    console.log('Leave me alone');
+  }
+
+  public  toggleFilters(){
+    document.getElementById("filters").classList.toggle(styles.show);
+  }
+
 
 
 }
-

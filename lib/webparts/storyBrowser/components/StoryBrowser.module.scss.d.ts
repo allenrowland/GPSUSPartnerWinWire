@@ -1,6 +1,5 @@
 declare const styles: {
     storyBrowser: string;
-    teams: string;
     welcome: string;
     welcomeImage: string;
     links: string;
