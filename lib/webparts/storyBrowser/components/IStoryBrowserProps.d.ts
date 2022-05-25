@@ -1,10 +1,7 @@
 import * as story from '../../Story';
+import * as filter from '../../Filters';
 export interface IStoryBrowserProps {
     stories: story.Story[];
-    tagsFilters: string[];
-    industryFilters: string[];
-    partnerTypeFilters: string[];
-    solutionAreaFilters: string[];
-    storyTypeFilters: string[];
+    filters: filter.Filter[];
 }
 //# sourceMappingURL=IStoryBrowserProps.d.ts.map

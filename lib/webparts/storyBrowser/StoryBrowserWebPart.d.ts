@@ -7,11 +7,7 @@ export interface IStoryBrowserWebPartProps {
 }
 export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBrowserWebPartProps> {
     private _stories;
-    private _tagsFilters;
-    private _industryFilters;
-    private _partnerTypeFilters;
-    private _solutionAreaFilters;
-    private _storyTypeFilters;
+    private _filters;
     private _lists;
     protected onInit(): Promise<void>;
     render(): void;

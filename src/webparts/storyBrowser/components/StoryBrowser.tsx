@@ -6,6 +6,7 @@ import { forEach } from 'lodash';
 import JQuery from 'jquery';
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import { Icon } from '@fluentui/react/lib/Icon';
+import { Items } from '@pnp/sp/items';
 initializeIcons();
 const ChevronDownIcon = () => <Icon iconName="ChevronDown" />;
 const SearchIcon = () => <Icon iconName="Search" />;
@@ -21,11 +22,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
   public render(): React.ReactElement<IStoryBrowserProps> {
     const {
       stories,
-      tagsFilters,
-      industryFilters,
-      partnerTypeFilters,
-      solutionAreaFilters,
-      storyTypeFilters
+      filters
     } = this.props;
 
     console.log(this.props.stories);
@@ -46,34 +43,34 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
                     <p className={styles.uncheck}>Uncheck All</p>
                       <strong>Industry:</strong>
                       <ul>
-                        {this.props.industryFilters.map((value, index) =>{
-                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        {this.props.filters.filter(item => item.Field == 'Industry').map((value, index) =>{
+                          return <li><input type="checkbox" value="{value.Value}" checked={value.IsChecked} /> {value.Value}</li>;
                         })}
                       </ul>
                       <br />
                       <strong>Solution area:</strong>
                       <ul>
-                        {this.props.solutionAreaFilters.map((value, index) =>{
-                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        {this.props.filters.filter(item => item.Field == 'SolutionArea').map((value, index) =>{
+                          return <li><input type="checkbox" value="{value.Value}" checked={value.IsChecked} /> {value.Value}</li>;
                         })}
                       </ul>
                   </div>
                   <div><strong>Partner Type:</strong>
                       <ul>
-                        {this.props.partnerTypeFilters.map((value, index) =>{
-                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        {this.props.filters.filter(item => item.Field == 'PartnerType').map((value, index) =>{
+                          return <li><input type="checkbox" value="{value.Value}" checked={value.IsChecked} /> {value.Value}</li>;
                         })}
                       </ul>   <br />
                       <strong>Story Type:</strong>
                       <ul>
-                        {this.props.storyTypeFilters.map((value, index) =>{
-                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        {this.props.filters.filter(item => item.Field == 'StoryType').map((value, index) =>{
+                          return <li><input type="checkbox" value="{value.Value}" checked={value.IsChecked} /> {value.Value}</li>;
                         })}
                       </ul>   <br />
                       <strong>Keyword/tag filter:</strong>
                       <ul>
-                        {this.props.tagsFilters.map((value, index) =>{
-                          return <li><input type="checkbox" value="" checked /> {value}</li>;
+                        {this.props.filters.filter(item => item.Field == 'Tags').map((value, index) =>{
+                          return <li><input type="checkbox" value="{value.Value}" checked={value.IsChecked} /> {value.Value}</li>;
                         })}
                       </ul>
                   </div>

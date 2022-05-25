@@ -34,11 +34,7 @@ import { useControlledState } from 'office-ui-fabric-react/lib/Foundation';
 export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBrowserWebPartProps> {
 
   private _stories: story.Story[];
-  private _tagsFilters: string[];
-  private _industryFilters: string[];
-  private _partnerTypeFilters: string[];
-  private _solutionAreaFilters: string[];
-  private _storyTypeFilters: string[];
+  private _filters: wwfilters.Filter[] = [];
   private _lists: IPropertyPaneDropdownOption[];
 
   protected onInit(): Promise<void> {
@@ -64,11 +60,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
             
             const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
               stories: this._stories,
-              tagsFilters: this._tagsFilters,
-              industryFilters: this._industryFilters,
-              partnerTypeFilters: this._partnerTypeFilters,
-              solutionAreaFilters: this._solutionAreaFilters,
-              storyTypeFilters: this._storyTypeFilters
+              filters: this._filters
             });
             ReactDom.render(element, this.domElement);
             })
@@ -144,25 +136,56 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
       let list = sp.web.lists.getById(this.properties.ListGUID);
       
       let tags = list.fields.getByInternalNameOrTitle('Tags');
-      tags.select('Choices').get().then((tgoptions) => {  
-        this._tagsFilters = tgoptions['Choices'];
+      tags.select('Choices').get().then((tgoptions) => { 
+        
+        tgoptions['Choices'].forEach(item => {
+          this._filters.push({
+            Field: 'Tags',
+            Value: item,
+            IsChecked: true
+          });
+        });
         
       
         let industry = list.fields.getByInternalNameOrTitle('Industry');
         industry.select('Choices').get().then((idoptions) => {  
-          this._industryFilters = idoptions['Choices'];            
+          idoptions['Choices'].forEach(item => {
+            this._filters.push({
+              Field: 'Industry',
+              Value: item,
+              IsChecked: true
+            });
+          });    
       
           let partnerType = list.fields.getByInternalNameOrTitle('PartnerType');
           partnerType.select('Choices').get().then((ptoptions) => {  
-            this._partnerTypeFilters = ptoptions['Choices'];
+            ptoptions['Choices'].forEach(item => {
+              this._filters.push({
+                Field: 'PartnerType',
+                Value: item,
+                IsChecked: true
+              });
+            });
 
             let solutionArea = list.fields.getByInternalNameOrTitle('SolutionArea');
             solutionArea.select('Choices').get().then((saoptions) => {  
-              this._solutionAreaFilters = saoptions['Choices'];
+              saoptions['Choices'].forEach(item => {
+                this._filters.push({
+                  Field: 'SolutionArea',
+                  Value: item,
+                  IsChecked: true
+                });
+              });
               
               let storyType = list.fields.getByInternalNameOrTitle('StoryType');
               storyType.select('Choices').get().then((stoptions) => {  
-                this._storyTypeFilters = stoptions['Choices'];
+                stoptions['Choices'].forEach(item => {
+                  this._filters.push({
+                    Field: 'StoryType',
+                    Value: item,
+                    IsChecked: false
+                  });
+                });
 
                 resolve(true);
               });
@@ -174,7 +197,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   }
 
   
-  private _getSearchData(keyword: string = 'Accenture', sort: number = 0)
+  private _getSearchData(keyword: string = '', sort: number = 0, filters :wwfilters.Filters = null)
   {
     sp.setup({
       spfxContext: this.context
