@@ -42,7 +42,11 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     return super.onInit();
   }
 
-  public render(): void {
+  public render(search :wwfilters.Search = {
+    Filters: [],
+    Keyword: '',
+    Sort: { Value: 0, Title: "Publish Date"}
+  }): void {
       //Get all Lists for configuration
       this.getLists().then(listResolve =>{
       this._lists = listResolve as IPropertyPaneDropdownOption[];
@@ -55,7 +59,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
         this._getfieldChoices().then((fieldResponse) => {
 
           //Get Initial List
-          this._getSearchData().then(response => {
+          this._getSearchData(search).then(response => {
             this._stories = response as story.Story[];
             
             const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
@@ -183,7 +187,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
                   this._filters.push({
                     Field: 'StoryType',
                     Value: item,
-                    IsChecked: false
+                    IsChecked: true
                   });
                 });
 
@@ -197,16 +201,16 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   }
 
   
-  private _getSearchData(keyword: string = '', sort: number = 0, filters :wwfilters.Filters = null)
+  private _getSearchData(search :wwfilters.Search)
   {
     sp.setup({
       spfxContext: this.context
     });  
 
-    let searchURI = '?InplaceSearchQuery=' + encodeURIComponent(keyword);    
+    let searchURI = '?InplaceSearchQuery=' + encodeURIComponent(search.Keyword != null ? search.Keyword : '');    
     let sortURI = '&SortField=PublishDate&SortDir=Desc';
 
-    if(sort == 1){
+    if(search.Sort != null && search.Sort.Value == 1){
       sortURI = '&SortField=Title&SortDir=Asc'
     }
     

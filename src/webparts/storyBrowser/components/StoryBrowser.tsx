@@ -25,6 +25,11 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
       filters
     } = this.props;
 
+    this.state = {
+      searchQuery: ""
+    }
+  
+
     console.log(this.props.stories);
     //UNCOMMENT FOR PRODUCTION
     //let featuredStories: story.Story[] = this.props.stories.filter(item => item.Featured == "Yes");
@@ -77,7 +82,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
               </div>
             </div>
           </div>
-          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
+          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" onBlur={this.handleInputChanged.bind(this)} /> <SearchIcon/> </div>
           <div className={styles.sortResults}>
             <button className={styles.sortBtn}><span>Sort A-Z</span></button>
             <span>{story.GSPUSStoryHelper._resultCount(this.props.stories)}</span>
@@ -87,6 +92,14 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
 
       </section>
     );
+  }
+
+  handleInputChanged(event) {
+    this.setState({
+      searchQuery: event.target.value
+    });
+    console.log(event.target.value);
+    this.render();
   }
 
   private stories(items: story.Story[], featured: boolean = false): React.ReactElement{

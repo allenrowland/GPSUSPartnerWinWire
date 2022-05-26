@@ -1,6 +1,7 @@
 import { Version } from '@microsoft/sp-core-library';
 import { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import * as wwfilters from '../Filters';
 export interface IStoryBrowserWebPartProps {
     description: string;
     ListGUID: string;
@@ -10,7 +11,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     private _filters;
     private _lists;
     protected onInit(): Promise<void>;
-    render(): void;
+    render(search?: wwfilters.Search): void;
     protected onDispose(): void;
     protected get dataVersion(): Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;

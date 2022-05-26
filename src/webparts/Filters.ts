@@ -1,5 +1,7 @@
-export interface Filters{
-  Value :Filter[];
+export interface Search{
+  Filters: Filter[];
+  Keyword: string;
+  Sort: Sort;
 }
 
 
@@ -9,5 +11,12 @@ export interface Filter
   Value :string;
   IsChecked :boolean;
 }
+
+export interface Sort
+{
+  Title: string;
+  Value :number;
+}
+
 
 
