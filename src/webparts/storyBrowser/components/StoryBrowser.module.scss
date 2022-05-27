@@ -184,14 +184,15 @@ margin-right:20px;
   font-family:Segoe UI, Arial, sans-serif;
 }
 .sortBtn{
-  background-repeat: no-repeat;
-  background-position: right;
-   background-size:20px;
+  background:none;
   border:none;
   padding-right:25px;
   font-size:17px;
   font-family:Segoe UI, Arial, sans-serif;
   margin-right:10px;
+    i{
+      font-size:14px;
+    }
 }
 .items{
   display:flex;
@@ -210,19 +211,32 @@ margin-right:20px;
 max-width:320px;
 padding:20px;
 }
+.viewStory{
+  text-decoration:none;
+  font-family:Segoe UI, Arial, sans-serif;
+  font-size:17px;
+  font-weight:bold;
+  margin-top:20px;
+}
 .item img{
   margin-bottom:16px;
+}
+.viewStory i{
+  font-size:14px;
+  font-weight:bold;
+ 
 }
 .itemTitle{
   font-weight:bold;
   font-family:Segoe UI, Arial, sans-serif;
   font-size:18px;
   color:#0078D7;
-  margin-bottom:10px;
+  margin-bottom:12px;
   text-decoration:none;
 }
 .itemDate{
   background:none;
+  font-size:16px;
 }
 .itemSolution{
   background:none;
@@ -238,8 +252,10 @@ padding:20px;
 }
 .item p{
   font-family:Segoe UI, Arial, sans-serif;
-  font-size:18px;
-  margin:6px;
+  font-size:15px;
+  margin:5px;
+  line-height:18px;
+  margin-left:0px;
 }
 @media all and (max-width:800px){
   .item{

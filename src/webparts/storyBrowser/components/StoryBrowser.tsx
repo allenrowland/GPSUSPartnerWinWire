@@ -10,7 +10,7 @@ import { Items } from '@pnp/sp/items';
 initializeIcons();
 const ChevronDownIcon = () => <Icon iconName="ChevronDown" />;
 const SearchIcon = () => <Icon iconName="Search" />;
-
+const ChevronRightIcon = () => <Icon iconName="ChevronRight" />;
 
 
 const inputStyle = {
@@ -78,7 +78,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
             </div>
             <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
           <div className={styles.sortResults}>
-            <button className={styles.sortBtn}><span>Sort A-Z</span></button>
+            <button className={styles.sortBtn}><span>Sort A-Z</span> <ChevronDownIcon /></button>
             <span>{story.GSPUSStoryHelper._resultCount(this.props.stories)}</span>
           </div>
           </div>
@@ -127,6 +127,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
         <p className={styles.itemIndustry}>INDUSTRY: {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
         <p className={styles.itemSolution}>SOLUTION: {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
         <p className={styles.itemType}>STORY TYPE: {item.StoryType}</p>
+        <a className={styles.viewStory} href="${item.URL}">View Story <ChevronRightIcon /></a>
       </div>
     );
   }

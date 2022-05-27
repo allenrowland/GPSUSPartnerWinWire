@@ -16,6 +16,7 @@ declare const styles: {
     sortBtn: string;
     items: string;
     item: string;
+    viewStory: string;
     itemTitle: string;
     itemDate: string;
     itemSolution: string;
