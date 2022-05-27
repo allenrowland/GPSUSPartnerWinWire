@@ -35,7 +35,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
 
     return (
       <section id="storyBrowser" className={styles.storyBrowser}>
-        <div id="filters">
+        <div id="filters" className={styles.filtersContainer}>
           <div className={styles.filtersDropdown}>
             <div onClick={this.toggleFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
             <div className={styles.filters}>
@@ -76,12 +76,13 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
                   </div>
               </div>
             </div>
-          </div>
-          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
+            <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
           <div className={styles.sortResults}>
             <button className={styles.sortBtn}><span>Sort A-Z</span></button>
             <span>{story.GSPUSStoryHelper._resultCount(this.props.stories)}</span>
           </div>
+          </div>
+       
           {this.stories(featuredStories, true)}
           {this.stories(otherStories)}
 
@@ -97,7 +98,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     return(
       <div>
         {featured ? (
-          <div id="featuredItems">
+          <div id="featuredItems" className={styles.featuredItems}>
             <h4>Featured</h4>
             <div className={styles.items}>
             {items.map((value, index) => {
@@ -120,12 +121,12 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
     return(
       <div className={styles.item}>
         <img src="https://via.placeholder.com/320x179" alt=""/>
-        <a className="itemTitle" href="${item.URL}">{item.Title}</a>
-        <p className="itemDate"><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
-        <p className="itemPartner">PARTNER: {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
-        <p className="itemIndusty">INDUSTRY: {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
-        <p className="itemSolution">SOLUTION: {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
-        <p className="itemType">STORY TYPE: {item.StoryType}</p>
+        <a className={styles.itemTitle} href="${item.URL}">{item.Title}</a>
+        <p className={styles.itemDate}><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
+        <p className={styles.itemPartner}>PARTNER: {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
+        <p className={styles.itemIndustry}>INDUSTRY: {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
+        <p className={styles.itemSolution}>SOLUTION: {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
+        <p className={styles.itemType}>STORY TYPE: {item.StoryType}</p>
       </div>
     );
   }

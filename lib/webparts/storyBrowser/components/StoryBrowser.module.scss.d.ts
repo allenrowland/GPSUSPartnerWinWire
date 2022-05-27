@@ -4,6 +4,7 @@ declare const styles: {
     welcomeImage: string;
     links: string;
     filters: string;
+    filtersContainer: string;
     activate: string;
     filtersSearch: string;
     filtersDropdown: string;
@@ -16,6 +17,11 @@ declare const styles: {
     items: string;
     item: string;
     itemTitle: string;
+    itemDate: string;
+    itemSolution: string;
+    itemPartner: string;
+    itemIndustry: string;
+    itemType: string;
 };
 export default styles;
 //# sourceMappingURL=StoryBrowser.module.scss.d.ts.map
