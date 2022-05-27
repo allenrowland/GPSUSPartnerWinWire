@@ -10,7 +10,6 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'StoryBrowserWebPartStrings';
 import StoryBrowser from './components/StoryBrowser';
@@ -29,7 +28,6 @@ export interface IStoryBrowserWebPartProps {
 }
 
 import { sp } from "@pnp/sp/presets/all";  
-import { useControlledState } from 'office-ui-fabric-react/lib/Foundation';
 
 export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBrowserWebPartProps> {
 
@@ -67,8 +65,8 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
               filters: this._filters
             });
             ReactDom.render(element, this.domElement);
-            })
-          })
+            });
+          });
           return true;
         });
       });     
@@ -118,10 +116,10 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
           let option :IPropertyPaneDropdownOption = {
             key: item.Id,
             text: item.Title
-          }
+          };
 
           options.push(option);
-        })
+        });
         resolve(options);
       });
     });
@@ -210,9 +208,9 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     let searchURI = '?InplaceSearchQuery=' + encodeURIComponent(search.Keyword != null ? search.Keyword : '');    
     let sortURI = '&SortField=PublishDate&SortDir=Desc';
 
-    if(search.Sort != null && search.Sort.Value == 1){
-      sortURI = '&SortField=Title&SortDir=Asc'
-    }
+    /*if(search.Sort != null && search.Sort.Value == 1){
+      sortURI = '&SortField=Title&SortDir=Asc';
+    }*/
     
     return new Promise((resolve) => {
       const restAPI = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists(guid'${this.properties.ListGUID}')/RenderListDataAsStream` +searchURI + sortURI;
@@ -239,7 +237,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
             }
             resolve(JSON.parse(JSON.stringify(filteredResults)));
 
-          })
+          });
          });
 
     });

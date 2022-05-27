@@ -1,5 +1,3 @@
-import { Guid } from "@microsoft/sp-core-library";
-import { forEach, result } from "lodash";
 import * as moment from 'moment';
 
 
@@ -9,6 +7,7 @@ export interface Stories
 }
 export interface Story 
 {
+  Id: number;
   Title: string;
   PublishDate :Date;
   Image :object;
@@ -45,7 +44,7 @@ export interface SPList
 export class GSPUSStoryHelper {
     
 
-    public static _listAll(items: object, spacer: string = ', '): string{
+    public static _listAll(items: object, spacer: string = '/'): string{
         let res :string = '';
         let i :number = 0;
         if(items != null){
@@ -75,7 +74,7 @@ export class GSPUSStoryHelper {
         }else if(count == 0){
             res = 'No Results';
         }else{
-            res = count.toLocaleString() + ' Results';
+            res = count.toLocaleString() + ' Result' + (count > 1 ? 's' : '');
         }
 
         return res;

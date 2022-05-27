@@ -2,6 +2,7 @@ export interface Stories {
     value: Story[];
 }
 export interface Story {
+    Id: number;
     Title: string;
     PublishDate: Date;
     Image: object;
