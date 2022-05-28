@@ -3,7 +3,11 @@
 .storyBrowser input{
   font-family:Segoe UI, Arial, sans-serif;
   border:0px;
-  font-size:16px;
+  font-size:17px;
+}
+.storyBrowser input::placeholder{
+  color:#333;
+  font-size:17px;
 }
 .welcome {
   text-align: center;
@@ -11,6 +15,12 @@
 .welcomeImage {
   width: 100%;
   max-width: 420px;
+}
+.filters{
+  font-size:17px;
+}
+.filters li{
+  font-size:17px;
 }
 .links {
   a {
@@ -62,21 +72,40 @@ body{
   padding:10px 20px;
   max-width:100%;
 }
-#filters input{
+.filtersSearch i{
+  margin-left:-30px!important;
+}
+.partnerSearch::placeholder{
+  color:#333!important;
+
+}
+.filterSearch input{
   font-family:Segoe UI, Arial, sans-serif;
   border:0px;
-  font-size:16px;
+  font-size:17px;
+  color:#333;
+
+  &::placeholder{
+    color:#333;
+    font-size:17px;
+  }
 }
 #filters input:focus{
   background:none;
 }
 .activate{
   background-repeat: no-repeat;
-  background-position: right;
-  border-bottom: 2px solid #0078D7;
-  margin-right:20px;
-  padding:10px 20px;
-  max-width:100%;
+  background-position: 100%;
+  margin-right: 20px;
+  padding: 12px 20px;
+    padding-left: 20px;
+  max-width: 100%;
+  font-size: 17px;
+  color: #333;
+  margin-bottom: -5px !important;
+  margin-top: 5px;
+  padding-left: 0px;
+
 }
 .activate:hover{
   cursor:pointer;
@@ -88,6 +117,15 @@ body{
   margin-right:20px;
   padding:10px 20px;
   max-width:100%;
+  padding-left:0px;
+}
+.filtersSearch input{
+  font-size:17px;
+
+}
+.filtersSearch input::placeholder{
+  color:#333;
+  font-size:17px;
 }
 #filters .filtersDropdown{
   width:320px;
@@ -95,6 +133,13 @@ body{
   font-size:16px;
   font-family:Segoe UI, Arial, sans-serif;
   position:relative;
+}
+.filtersDropdown{
+  border-bottom: 2px solid #0078D7;
+  margin-right:20px;
+}
+.filtersSearch input{
+  height:100%;
 }
 .filtersDropdown .filters{
   position:absolute;
@@ -112,10 +157,13 @@ left:0px;
 padding-bottom:40px;
 }
 .filtersContainer .filtersDropdown{
-  width:400px;
+  width:300px;
 }
-.filtersDropdown i{
-  float:right;
+.filtersOptions{
+  display:flex;
+}
+.filtersOptions .FirstRow{
+  margin-right:10px;
 }
 .show .filters{
   display:flex!important;
@@ -124,6 +172,7 @@ padding-bottom:40px;
 -moz-animation: fadeIn .5s;
 -o-animation: fadeIn .5s;
 -ms-animation: fadeIn .5s;
+flex-direction:column;
 }
 @keyframes fadeIn {
 0% {opacity:0;}
@@ -146,7 +195,7 @@ padding-bottom:40px;
 100% {opacity:1;}
 }
 .uncheck{
-  margin-bottom:10px;
+  margin-bottom:14px;
 }
 .uncheck:hover{
 cursor:pointer;
@@ -164,7 +213,7 @@ margin-right:20px;
   max-width:100%;
 }
 .featuredItems{
-  width:1080px;
+ 
   max-width:100%;
   margin:auto;
   background:#F5F5F5;
@@ -178,10 +227,11 @@ margin-right:20px;
   padding-left:20px;
   margin-bottom:0px;
 }
-#filters .sortResults{
+.filtersContainer .sortResults{
   border:0px;
-  font-size:16px;
+  font-size:17px;
   font-family:Segoe UI, Arial, sans-serif;
+  display:flex;
 }
 .sortBtn{
   background:none;
@@ -190,9 +240,6 @@ margin-right:20px;
   font-size:17px;
   font-family:Segoe UI, Arial, sans-serif;
   margin-right:10px;
-    i{
-      font-size:14px;
-    }
 }
 .items{
   display:flex;
@@ -201,6 +248,19 @@ margin-right:20px;
   flex-direction:row;
   flex-wrap:wrap;
   max-width:100%;
+}
+.viewBtn i{
+  font-size:12px;
+}
+.viewBtn{
+  display:flex;
+  height:50px;
+  position:relative;
+}
+.viewBtn a{
+  position:absolute;
+  right:0;
+  bottom:0;
 }
 .item{
  width: 320px;
@@ -217,12 +277,13 @@ padding:20px;
   font-size:17px;
   font-weight:bold;
   margin-top:20px;
+  color:#0078D7;
 }
 .item img{
   margin-bottom:16px;
 }
 .viewStory i{
-  font-size:14px;
+
   font-weight:bold;
  
 }
@@ -234,9 +295,13 @@ padding:20px;
   margin-bottom:12px;
   text-decoration:none;
 }
+.item{
+  color:#707070;
+}
 .itemDate{
   background:none;
-  font-size:16px;
+  font-size:16px!important;
+  color:#000;
 }
 .itemSolution{
   background:none;
@@ -253,10 +318,18 @@ padding:20px;
 .item p{
   font-family:Segoe UI, Arial, sans-serif;
   font-size:15px;
-  margin:5px;
-  line-height:18px;
-  margin-left:0px;
+  line-height:22px;
+  margin:0px;
 }
+i[data-icon-name="Search"]{
+  font-size: 14px;
+  margin-left: 8px;
+}
+i[data-icon-name="ChevronDown"]{
+  font-size: 14px;
+  margin-left: 8px;
+}
+
 @media all and (max-width:800px){
   .item{
    width:80%;
@@ -278,3 +351,13 @@ padding:20px;
       align-items:center;
   }
 }
+@media all and (max-width:1000px){
+  .item{
+  width: 44.5%;
+}
+}
+@media all and (max-width:960px){
+  .item{
+    width: 100%!important;
+  }
+  }

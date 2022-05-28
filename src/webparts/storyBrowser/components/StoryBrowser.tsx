@@ -39,8 +39,12 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
           <div className={styles.filtersDropdown}>
             <div onClick={this.toggleFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
             <div className={styles.filters}>
-                <div>
-                    <p className={styles.uncheck}>Uncheck All</p>
+            <div>
+                    <p className={styles.uncheck}>Uncheck All</p></div>
+                    <div className={styles.filtersOptions}>
+                <div className={styles.FirstRow}>
+                
+                  
                       <strong>Industry:</strong>
                       <ul>
                         {this.props.filters.filter(item => item.Field == 'Industry').map((value, index) =>{
@@ -74,12 +78,15 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
                         })}
                       </ul>
                   </div>
+                  </div>
               </div>
             </div>
-            <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
+            <div className={styles.filtersSearch}>
+           
+              <input className={styles.partnerSearch} style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" /> <SearchIcon /> </div>
           <div className={styles.sortResults}>
             <button className={styles.sortBtn}><span>Sort A-Z</span> <ChevronDownIcon /></button>
-            <span>{story.GSPUSStoryHelper._resultCount(this.props.stories)}</span>
+            <p>{story.GSPUSStoryHelper._resultCount(this.props.stories)}</p>
           </div>
           </div>
        
@@ -123,11 +130,11 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, {}
         <img src="https://via.placeholder.com/320x179" alt=""/>
         <a className={styles.itemTitle} href="${item.URL}">{item.Title}</a>
         <p className={styles.itemDate}><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
-        <p className={styles.itemPartner}>PARTNER: {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
-        <p className={styles.itemIndustry}>INDUSTRY: {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
-        <p className={styles.itemSolution}>SOLUTION: {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
-        <p className={styles.itemType}>STORY TYPE: {item.StoryType}</p>
-        <a className={styles.viewStory} href="${item.URL}">View Story <ChevronRightIcon /></a>
+        <p className={styles.itemPartner}><strong>PARTNER:</strong> {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
+        <p className={styles.itemIndustry}><strong>INDUSTRY:</strong> {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
+        <p className={styles.itemSolution}><strong>SOLUTION:</strong> {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
+        <p className={styles.itemType}><strong>STORY TYPE:</strong> {item.StoryType}</p>
+       <div className={styles.viewBtn}> <a className={styles.viewStory} href="${item.URL}">View Story <ChevronRightIcon /></a></div>
       </div>
     );
   }

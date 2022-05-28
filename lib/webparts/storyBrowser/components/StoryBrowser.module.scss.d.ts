@@ -2,12 +2,16 @@ declare const styles: {
     storyBrowser: string;
     welcome: string;
     welcomeImage: string;
-    links: string;
     filters: string;
+    links: string;
     filtersContainer: string;
-    activate: string;
     filtersSearch: string;
+    partnerSearch: string;
+    filterSearch: string;
+    activate: string;
     filtersDropdown: string;
+    filtersOptions: string;
+    FirstRow: string;
     show: string;
     fadeIn: string;
     uncheck: string;
@@ -15,6 +19,7 @@ declare const styles: {
     sortResults: string;
     sortBtn: string;
     items: string;
+    viewBtn: string;
     item: string;
     viewStory: string;
     itemTitle: string;
