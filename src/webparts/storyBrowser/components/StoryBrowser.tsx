@@ -8,8 +8,7 @@ import FilterGroup from '../components/FilterGroup';
 initializeIcons();
 const ChevronDownIcon = () => <Icon iconName="ChevronDown" />;
 const SearchIcon = () => <Icon iconName="Search" />;
-
-
+const ChevronRightIcon = () => <Icon iconName="ChevronRight" />;
 
 const inputStyle = {
   fontFamily: "Segoe UI, Arial, sans-serif",
@@ -46,13 +45,17 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
 
     return (
       <section id="storyBrowser" className={styles.storyBrowser}>
-        <div id="filters">
+        <div id="filters"  className={styles.filtersContainer}>
           <div className={styles.filtersDropdown}>
             <div onClick={this.toggleFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
+        
             <div className={styles.filters}>
-                <div>
-                    <button type="button" className={styles.uncheck} onClick={this.onClearAllClick}>Uncheck All</button>                 
+            <button type="button" className={styles.uncheck} onClick={this.onClearAllClick}>Uncheck All</button>                 
                  
+              <div className={styles.filterOptions}>
+            
+                <div>
+                   
                     <FilterGroup
                       groupName={'Industry'}
                       filterOptions={filters.filter(item => item.Field == 'Industry')}
@@ -86,19 +89,21 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
                       activeFilters={this.state._storyBrowserStateFilters}
                     />
                   </div>
+                  </div>
               </div>
             </div>
-          </div>
-          <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" onChange={this.handleSearchChange} value={this.state._storyBrowserStateSearchTerm != '' ? this.state._storyBrowserStateSearchTerm : null}  /> <SearchIcon/> </div>
+            <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" onChange={this.handleSearchChange} value={this.state._storyBrowserStateSearchTerm != '' ? this.state._storyBrowserStateSearchTerm : null}  /> <SearchIcon/> </div>
           <div className={styles.sortResults}>
-            <select value={this.state._storyBrowserStateSort} onChange={this.handleSortChange}>
+            <select className={styles.sortBtn} value={this.state._storyBrowserStateSort} onChange={this.handleSortChange}>
               <option value="0">Sort Publish Date Desc</option>
               <option value="1">Sort Publish Date Asc</option>
               <option value="2">Sort A-Z</option>
               <option value="3">Sort Z-A</option>
             </select>
-            <span>{story.GSPUSStoryHelper._resultCount(filteredStories)}</span>
+            <p>{story.GSPUSStoryHelper._resultCount(filteredStories)}</p>
           </div>
+          </div>
+         
           {this.stories(featuredStories, true)}
           {this.stories(otherStories)}
 
@@ -215,7 +220,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     return(
       <div>
         {featured ? (
-          <div id="featuredItems">
+          <div id="featuredItems" className={styles.featuredItems}>
             <h4>Featured</h4>
             <div className={styles.items}>
             {items.map((value, index) => {
@@ -245,10 +250,10 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
         <img src="https://via.placeholder.com/320x179" alt=""/>
         <a className="itemTitle" href="${item.URL}">{item.Title}</a>
         <p className="itemDate"><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
-        <p className="itemPartner">PARTNER: {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
-        <p className="itemIndusty">INDUSTRY: {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
-        <p className="itemSolution">SOLUTION: {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
-        <p className="itemType">STORY TYPE: {item.StoryType}</p>
+        <p className="itemPartner"><strong>PARTNER:</strong> {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
+        <p className="itemIndusty"><strong>INDUSTRY:</strong> {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
+        <p className="itemSolution"><strong>SOLUTION:</strong> {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
+        <p className="itemType"><strong>STORY TYPE:</strong> {item.StoryType}</p>
       </div>
     );
   }
