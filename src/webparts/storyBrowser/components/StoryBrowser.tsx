@@ -254,6 +254,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
         <p className="itemIndusty"><strong>INDUSTRY:</strong> {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
         <p className="itemSolution"><strong>SOLUTION:</strong> {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
         <p className="itemType"><strong>STORY TYPE:</strong> {item.StoryType}</p>
+        <div className={styles.viewBtn}> <a className={styles.viewStory} href="${item.URL}">View Story <ChevronRightIcon /></a></div>
       </div>
     );
   }
