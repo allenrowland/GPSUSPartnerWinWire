@@ -148,7 +148,7 @@ body{
   display:flex;
   flex-direction:row;
   background:#FFF;
-  top:50px;
+  top:0px;
   width:100%;
   padding:20px;
   -webkit-box-shadow: 1px 5px 10px 1px rgba(0,0,0,0.4); 
@@ -173,6 +173,9 @@ padding-bottom:40px;
 -o-animation: fadeIn .5s;
 -ms-animation: fadeIn .5s;
 flex-direction:column;
+background:#FFF;
+width:380px;
+z-index:9999;
 }
 @keyframes fadeIn {
 0% {opacity:0;}
