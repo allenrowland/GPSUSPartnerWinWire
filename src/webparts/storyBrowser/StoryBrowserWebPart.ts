@@ -59,6 +59,8 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
           //Get Initial List
           this._getSearchData(search).then(response => {
             this._stories = response as story.Story[];
+
+            console.log(this._stories);
             
             const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
               stories: this._stories,

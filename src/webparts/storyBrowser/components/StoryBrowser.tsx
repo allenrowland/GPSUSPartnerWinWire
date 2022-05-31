@@ -127,8 +127,9 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
 
   private compareDate(story1 :story.Story, story2: story.Story, key: string) 
   {
-    if (story1[key] > story2[key]) return 1;
-    if (story1[key] < story2[key]) return -1;
+    console.log('story1: ' + Date.parse(story1[key]) + ' story2: ' + Date.parse(story2[key]));
+    if (Date.parse(story1[key]) > Date.parse(story2[key])) return 1;
+    if (Date.parse(story1[key]) < Date.parse(story2[key])) return -1;
     return 0;
   }
 
@@ -153,7 +154,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     }
     
     if(this.state._storyBrowserStateSearchTerm != null && this.state._storyBrowserStateSearchTerm != ''){
-      console.log(this.state._storyBrowserStateSearchTerm);
       let queriedStories :story.Story[] = [];
       stories.forEach(storyItem => {
         let pushStory = false;
@@ -212,7 +212,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
 
   public onSubmissionTypeFilterChange = (filter: string, isActive: boolean) => {
     const currentFilters = this.state._storyBrowserStateFilters.filter((item) => item !== filter);
-    console.log(currentFilters);
     if (isActive) {
       currentFilters.push(filter);
     }
@@ -253,16 +252,17 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
   }
 
   private storyCard(item: story.Story): React.ReactElement{
+    console.log(item.URL);
     return(
       <div className={styles.item}>
-        <img src="https://via.placeholder.com/320x179" alt=""/>
-        <a className="itemTitle" href="${item.URL}">{item.Title}</a>
+        <img src={item.Image['serverRelativeUrl']} alt=""/>
+        <a className="itemTitle" href={item.URL}>{item.Title}</a>
         <p className="itemDate"><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
         <p className="itemPartner"><strong>PARTNER:</strong> {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
         <p className="itemIndusty"><strong>INDUSTRY:</strong> {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
         <p className="itemSolution"><strong>SOLUTION:</strong> {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
         <p className="itemType"><strong>STORY TYPE:</strong> {item.StoryType}</p>
-        <div className={styles.viewBtn}> <a className={styles.viewStory} href="${item.URL}">View Story <ChevronRightIcon /></a></div>
+        <div className={styles.viewBtn}> <a className={styles.viewStory} href={item.URL}>View Story <ChevronRightIcon /></a></div>
       </div>
     );
   }

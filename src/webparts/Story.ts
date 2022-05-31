@@ -12,7 +12,7 @@ export interface Story
   PublishDate :Date;
   Image :object;
   Description: string;
-  URL :object;
+  URL :string;
   LinkType :{
     Element :string
   };
