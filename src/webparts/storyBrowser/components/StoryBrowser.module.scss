@@ -214,7 +214,7 @@ margin-right:20px;
 .filters ul li{
   list-style:none;
   text-indent:none;
-  margin-top:10px;
+
 }
 #filters .filtersSearch{
   width:400px;
@@ -385,7 +385,7 @@ i[data-icon-name="ChevronDown"]{
     flex-direction:column;
     box-shadow:none!important;
     position:relative!important;
-    top:none!important;
+    top:0px!important;
     background:#FFF;
   }
   .filtersDropdown{
