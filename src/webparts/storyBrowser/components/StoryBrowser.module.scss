@@ -200,6 +200,7 @@ flex-direction:column;
   border:0px;
   max-width:100px;
   font-size:17px;
+
 }
 .uncheck:hover{
 cursor:pointer;
@@ -407,6 +408,9 @@ i[data-icon-name="ChevronDown"]{
     margin:0px;
     margin-left:15px;
     margin-bottom:20px;
+  }
+  .uncheck{
+    margin-left:-8px!important;
   }
 }
 @media all and (max-width:700px){
