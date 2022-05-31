@@ -30,6 +30,7 @@ declare const styles: {
     itemIndustry: string;
     itemType: string;
     itemList: string;
+    filterContainer: string;
 };
 export default styles;
 //# sourceMappingURL=StoryBrowser.module.scss.d.ts.map

@@ -54,14 +54,15 @@ body{
   margin-bottom:30px;
 }
 .filtersContainer{
-  width:1080px;
-  margin:auto;
+
+
   display:flex;
   flex-wrap:wrap;
   flex-direction:row;
   margin-top:30px;
   margin-bottom:30px;
   max-width:100%;
+  margin-left:20px;
 }
 .filtersContainer ul{
   list-style: none;
@@ -86,7 +87,7 @@ body{
   border:0px;
   font-size:17px;
   color:#333;
-
+  width:230px;
   &::placeholder{
     color:#333;
     font-size:17px;
@@ -129,19 +130,18 @@ body{
   color:#333;
   font-size:17px;
 }
-#filters .filtersDropdown{
-  
-  max-width:100%;
+
+.filtersDropdown{
+  border-bottom: 2px solid #0078D7;
+  margin-right:20px;
+  margin-left:60px;
   font-size:16px;
   font-family:Segoe UI, Arial, sans-serif;
   position:relative;
 }
-.filtersDropdown{
-  border-bottom: 2px solid #0078D7;
-  margin-right:20px;
-}
 .filtersSearch input{
   height:100%;
+  width:230px;
 }
 .filtersDropdown .filters{
   position:absolute;
@@ -235,7 +235,7 @@ margin-right:20px;
   padding-left: 20px;
   margin-bottom: 0;
   margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 60px;
   display: block;
   padding-top: 30px;
   margin-bottom: -15px;
@@ -245,6 +245,8 @@ margin-right:20px;
   font-size:17px;
   font-family:Segoe UI, Arial, sans-serif;
   display:flex;
+  margin-left:auto;
+  margin-right:70px;
 }
 .sortBtn{
   background:none;
@@ -257,11 +259,12 @@ margin-right:20px;
 .items{
   display:flex;
   width: 1080px;
-  margin:auto;
+  
   flex-direction:row;
   flex-wrap:wrap;
   max-width:100%;
   padding:20px;
+  padding-left:60px;
 
 }
 .viewBtn i{
@@ -365,7 +368,45 @@ i[data-icon-name="ChevronDown"]{
 @media all and (max-width:800px){
   .item{
    width:80%;
-    
+ 
+  }
+  .items{
+    padding:0px;
+  }
+  .filterContainer{
+    flex-direction:column;
+    padding:0px;
+  }
+  .show .filters{
+    flex-direction:column;
+    box-shadow:none!important;
+    position:relative!important;
+    top:none!important;
+    background:#FFF;
+  }
+  .filtersDropdown{
+    width:100%;
+    margin:0px;
+    margin-bottom:20px;
+  }
+  .filtersSearch{
+    width:100%;
+    margin:0px;
+    margin-bottom:20px;
+  }
+  .sortResults{
+    width:100%;
+    margin:0px!important;
+    margin-bottom:20px;
+  }
+  #filters .filtersContainer{
+    flex-direction:column;
+    padding:0px;
+  }
+  .featuredItems h4{
+    margin:0px;
+    margin-left:15px;
+    margin-bottom:20px;
   }
 }
 @media all and (max-width:700px){
@@ -383,19 +424,3 @@ i[data-icon-name="ChevronDown"]{
       align-items:center;
   }
 }
-@media all and (max-width:1080px){
-  .item{
-  width: 44.5%;
-}
-.filtersDropdown{
-  width:25%;
-}
-.filterSearch{
-  width:30%;
-}
-}
-@media all and (max-width:960px){
-  .item{
-    width: 100%!important;
-  }
-  }
