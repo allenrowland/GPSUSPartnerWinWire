@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as wwfilters from '../../Filters';
 interface IFilterGroupProps {
+    title: string;
     groupName: string;
     filterOptions: wwfilters.Filter[];
     activeFilters: string[];

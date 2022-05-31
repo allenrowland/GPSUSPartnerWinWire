@@ -43,6 +43,8 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     let featuredStories: story.Story[] = filteredStories.filter(item => item.Featured == "Yes");
     let otherStories: story.Story[] = filteredStories.filter(item => item.Featured != "Yes");
 
+    console.log(this.props.filters);
+
     return (
       <section id="storyBrowser" className={styles.storyBrowser}>
         <div id="filters"  className={styles.filtersContainer}>
@@ -57,39 +59,44 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
                 <div>
                    
                     <FilterGroup
+                      title = {'Industry'}
                       groupName={'Industry'}
-                      filterOptions={filters.filter(item => item.Field == 'Industry')}
+                      filterOptions={this.props.filters.filter(item => item.Field == 'Industry')}
                       onChange={this.onSubmissionTypeFilterChange}
                       activeFilters={this.state._storyBrowserStateFilters}
                     />                
                     <FilterGroup
+                      title = {'Solution Area'}
                       groupName={'SolutionArea'}
-                      filterOptions={filters.filter(item => item.Field == 'SolutionArea')}
+                      filterOptions={this.props.filters.filter(item => item.Field == 'SolutionArea')}
                       onChange={this.onSubmissionTypeFilterChange}
                       activeFilters={this.state._storyBrowserStateFilters}
                     />
                   </div>
                   <div>                
                     <FilterGroup
+                      title={'Partner Type'}
                       groupName={'PartnerType'}
-                      filterOptions={filters.filter(item => item.Field == 'PartnerType')}
+                      filterOptions={this.props.filters.filter(item => item.Field == 'PartnerType')}
                       onChange={this.onSubmissionTypeFilterChange}
                       activeFilters={this.state._storyBrowserStateFilters}
                     />
                     <FilterGroup
+                      title={'Story Type'}
                       groupName={'StoryType'}
-                      filterOptions={filters.filter(item => item.Field == 'StoryType')}
+                      filterOptions={this.props.filters.filter(item => item.Field == 'StoryType')}
                       onChange={this.onSubmissionTypeFilterChange}
                       activeFilters={this.state._storyBrowserStateFilters}
                     />
                     <FilterGroup
+                      title={'Tags'}
                       groupName={'Tags'}
-                      filterOptions={filters.filter(item => item.Field == 'Tags')}
+                      filterOptions={this.props.filters.filter(item => item.Field == 'Tags')}
                       onChange={this.onSubmissionTypeFilterChange}
                       activeFilters={this.state._storyBrowserStateFilters}
                     />
                   </div>
-                  </div>
+                </div>
               </div>
             </div>
             <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" onChange={this.handleSearchChange} value={this.state._storyBrowserStateSearchTerm != '' ? this.state._storyBrowserStateSearchTerm : null}  /> <SearchIcon/> </div>
@@ -165,13 +172,13 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     }
 
     if(this.state._storyBrowserStateFilters.length > 0){
-      let filters = this.state._storyBrowserStateFilters;
+      let cfilters = this.state._storyBrowserStateFilters;
       let filteredStories :story.Story[] = [];
       
       
       stories.forEach(storyItem => {
         let pushStory = false;
-        filters.forEach(filterItem => {
+        cfilters.forEach(filterItem => {
           let filter = filterItem.split('|')[0];
           let group = filterItem.split('|')[1];
           let storyFilters :string[] = typeof(storyItem[group]) == "string" ? [storyItem[group]] : (Object)(storyItem[group]);
@@ -205,6 +212,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
 
   public onSubmissionTypeFilterChange = (filter: string, isActive: boolean) => {
     const currentFilters = this.state._storyBrowserStateFilters.filter((item) => item !== filter);
+    console.log(currentFilters);
     if (isActive) {
       currentFilters.push(filter);
     }
