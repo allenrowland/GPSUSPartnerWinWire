@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as wwfilters from '../../Filters';
 
 interface IFilterGroupProps {
+    title: string;
     groupName: string;
     filterOptions: wwfilters.Filter[];
     activeFilters: string[];
@@ -19,10 +20,10 @@ export default class FilterGroup extends React.Component<IFilterGroupProps, IFil
     };
 
     public render() {
-        const { filterOptions, groupName, activeFilters } = this.props;
+        const { filterOptions, groupName, activeFilters, title } = this.props;
         return (
             <div>
-                <strong>{groupName}:</strong>
+                <strong>{title}:</strong>
                 <ul>
                 {filterOptions.map((filterValue) => (
                         <li>
