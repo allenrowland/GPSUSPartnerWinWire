@@ -3,7 +3,11 @@
 .storyBrowser input{
   font-family:Segoe UI, Arial, sans-serif;
   border:0px;
-  font-size:16px;
+  font-size:17px;
+}
+.storyBrowser input::placeholder{
+  color:#333;
+  font-size:17px;
 }
 .welcome {
   text-align: center;
@@ -11,6 +15,12 @@
 .welcomeImage {
   width: 100%;
   max-width: 420px;
+}
+.filters{
+  font-size:17px;
+}
+.filters li{
+  font-size:17px;
 }
 .links {
   a {
@@ -43,27 +53,64 @@ body{
   margin-top:30px;
   margin-bottom:30px;
 }
+.filtersContainer{
+  width:1080px;
+  margin:auto;
+  display:flex;
+  flex-wrap:wrap;
+  flex-direction:row;
+  margin-top:30px;
+  margin-bottom:30px;
+  max-width:100%;
+}
+.filtersContainer ul{
+  list-style: none;
+  padding-left: 0;
+  margin-bottom:20px;
+}
 #filters > .filters{
   border-bottom: 2px solid #0078D7;
   margin-right:20px;
   padding:10px 20px;
   max-width:100%;
 }
-#filters input{
+.filtersSearch i{
+  margin-left:-30px!important;
+}
+.partnerSearch::placeholder{
+  color:#333!important;
+
+}
+.filterSearch input{
   font-family:Segoe UI, Arial, sans-serif;
   border:0px;
-  font-size:16px;
+  font-size:17px;
+  color:#333;
+
+  &::placeholder{
+    color:#333;
+    font-size:17px;
+  }
 }
 #filters input:focus{
   background:none;
 }
 .activate{
   background-repeat: no-repeat;
-  background-position: right;
-  border-bottom: 2px solid #0078D7;
-  margin-right:20px;
-  padding:10px 20px;
-  max-width:100%;
+  background-position: 100%;
+  margin-right: 20px;
+  padding: 12px 20px;
+    padding-left: 20px;
+  max-width: 100%;
+  font-size: 17px;
+  color: #333;
+  margin-bottom: -5px !important;
+  margin-top: 5px;
+  padding-left: 0px;
+
+}
+.activate:hover{
+  cursor:pointer;
 }
 .filtersSearch{
   background-repeat: no-repeat;
@@ -72,27 +119,51 @@ body{
   margin-right:20px;
   padding:10px 20px;
   max-width:100%;
+  padding-left:0px;
+}
+.filtersSearch input{
+  font-size:17px;
+
+}
+.filtersSearch input::placeholder{
+  color:#333;
+  font-size:17px;
 }
 #filters .filtersDropdown{
-  width:320px;
+  
   max-width:100%;
   font-size:16px;
   font-family:Segoe UI, Arial, sans-serif;
   position:relative;
+}
+.filtersDropdown{
+  border-bottom: 2px solid #0078D7;
+  margin-right:20px;
+}
+.filtersSearch input{
+  height:100%;
 }
 .filtersDropdown .filters{
   position:absolute;
   display:flex;
   flex-direction:row;
   background:#FFF;
-  top:155%;
+  top:50px;
   width:100%;
   padding:20px;
   -webkit-box-shadow: 1px 5px 10px 1px rgba(0,0,0,0.4); 
 box-shadow: 1px 5px 10px 1px rgba(0,0,0,0.4);
 display:none;
 left:0px;
+  max-width:500px;
 padding-bottom:40px;
+}
+
+.filtersOptions{
+  display:flex;
+}
+.filtersOptions .FirstRow{
+  margin-right:10px;
 }
 .show .filters{
   display:flex!important;
@@ -101,6 +172,7 @@ padding-bottom:40px;
 -moz-animation: fadeIn .5s;
 -o-animation: fadeIn .5s;
 -ms-animation: fadeIn .5s;
+flex-direction:column;
 }
 @keyframes fadeIn {
 0% {opacity:0;}
@@ -123,7 +195,11 @@ padding-bottom:40px;
 100% {opacity:1;}
 }
 .uncheck{
-  margin-bottom:10px;
+  margin-bottom:14px;
+  background:none;
+  border:0px;
+  max-width:100px;
+  font-size:17px;
 }
 .uncheck:hover{
 cursor:pointer;
@@ -140,44 +216,65 @@ margin-right:20px;
   width:400px;
   max-width:100%;
 }
-#featuredItems{
-  width:1080px;
+.filterOptions{
+  display:flex;
+  flex-direction:row;
+}
+.featuredItems{
+ 
   max-width:100%;
   margin:auto;
   background:#F5F5F5;
-  padding:20px;
+ 
  
 }
-#featuredItems h4{
-  font-family:Segoe UI, Arial, sans-serif;
-  font-size:22px;
-  font-weight:normal;
-  padding-left:20px;
-  margin-bottom:0px;
+.featuredItems h4{
+  font-family: Segoe UI,Arial,sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  padding-left: 20px;
+  margin-bottom: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: block;
+  padding-top: 30px;
+  margin-bottom: -15px;
 }
-#filters .sortResults{
+.filtersContainer .sortResults{
   border:0px;
-  font-size:16px;
-  font-family:Segoe UI, Arial, sans-serif;
-}
-.sortBtn{
-  background-repeat: no-repeat;
-  background-position: right;
-   background-size:20px;
-  border:none;
-  padding-right:25px;
   font-size:17px;
   font-family:Segoe UI, Arial, sans-serif;
-  margin-right:10px;
+  display:flex;
+}
+.sortBtn{
+  background:none;
+  border:none;
+  padding-right:10px;
+  font-size:17px;
+  font-family:Segoe UI, Arial, sans-serif;
+  margin-right:20px;
 }
 .items{
   display:flex;
   width: 1080px;
   margin:auto;
   flex-direction:row;
-  justify-content:center;
   flex-wrap:wrap;
   max-width:100%;
+  padding:20px;
+}
+.viewBtn i{
+  font-size:12px;
+}
+.viewBtn{
+  display:flex;
+  height:50px;
+  position:relative;
+}
+.viewBtn a{
+  position:absolute;
+  right:0;
+  bottom:0;
 }
 .item{
  width: 320px;
@@ -188,20 +285,83 @@ margin-right:20px;
 max-width:320px;
 padding:20px;
 }
+.viewStory{
+  text-decoration:none;
+  font-family:Segoe UI, Arial, sans-serif;
+  font-size:17px;
+  font-weight:bold;
+  margin-top:20px;
+  color:#0078D7;
+}
 .item img{
   margin-bottom:16px;
+}
+.viewStory i{
+
+  font-weight:bold;
+ 
+}
+.item a{
+  font-weight:bold;
+  font-family:Segoe UI, Arial, sans-serif;
+  font-size:18px;
+  text-decoration:none;
+  margin-bottom:12px;
 }
 .itemTitle{
   font-weight:bold;
   font-family:Segoe UI, Arial, sans-serif;
   font-size:18px;
   color:#0078D7;
-  margin-bottom:10px;
+  margin-bottom:12px;
+  text-decoration:none;
+}
+.item{
+  color:#707070!important;
+}
+.itemDate{
+  background:none;
+  font-size:16px!important;
+  color:#000!important;
+}
+.itemSolution{
+  background:none;
+}
+.itemPartner{
+  background:none;
+}
+.itemIndustry{
+  background:none;
+}
+.itemType{
+  background:none;
 }
 .item p{
   font-family:Segoe UI, Arial, sans-serif;
-  font-size:18px;
-  margin-top:6px;
+  font-size:15px;
+  line-height:22px;
+  margin:0px;
+}
+i[data-icon-name="Search"]{
+  font-size: 14px;
+  margin-left: 8px;
+}
+i[data-icon-name="ChevronDown"]{
+  font-size: 14px;
+  margin-left: 8px;
+}
+.item .itemDate strong{
+  color:#000!important;
+  font-size:16px!important;
+}
+.itemList{
+  padding:20px;
+}
+@media all and (max-width:800px){
+  .item{
+   width:80%;
+    
+  }
 }
 @media all and (max-width:700px){
   #filters div{
@@ -211,9 +371,26 @@ padding:20px;
   #filters{
       max-width:90%;
   }
+ 
   .items{
       flex-direction:column;
       justify-content:space-between;
       align-items:center;
   }
 }
+@media all and (max-width:1080px){
+  .item{
+  width: 44.5%;
+}
+.filtersDropdown{
+  width:25%;
+}
+.filterSearch{
+  width:30%;
+}
+}
+@media all and (max-width:960px){
+  .item{
+    width: 100%!important;
+  }
+  }
