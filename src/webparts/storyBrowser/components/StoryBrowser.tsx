@@ -271,6 +271,4 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     document.getElementById("filters").classList.toggle(styles.show);
   }
 
-
-
 }
