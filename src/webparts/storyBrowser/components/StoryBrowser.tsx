@@ -46,10 +46,10 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     console.log(this.props.filters);
 
     return (
-      <section id="storyBrowser" className={styles.storyBrowser}>
+      <section id="storyBrowser" className={styles.storyBrowser} onClick={this.hideFilters}>
         <div id="filters"  className={styles.filtersContainer}>
           <div className={styles.filtersDropdown}>
-            <div onClick={this.toggleFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
+            <div onClick={this.showFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
         
             <div className={styles.filters}>
             <button type="button" className={styles.uncheck} onClick={this.onClearAllClick}>Uncheck All</button>                 
@@ -101,12 +101,12 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
             </div>
             <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" onChange={this.handleSearchChange} value={this.state._storyBrowserStateSearchTerm != '' ? this.state._storyBrowserStateSearchTerm : null}  /> <SearchIcon/> </div>
           <div className={styles.sortResults}>
-            <select className={styles.sortBtn} value={this.state._storyBrowserStateSort} onChange={this.handleSortChange}>
-              <option value="0">Sort Publish Date Desc</option>
-              <option value="1">Sort Publish Date Asc</option>
-              <option value="2">Sort A-Z</option>
-              <option value="3">Sort Z-A</option>
-            </select>
+              <select className={styles.sortBtn} value={this.state._storyBrowserStateSort} onChange={this.handleSortChange}>
+                <option value="0">Sort Publish Date Desc</option>
+                <option value="1">Sort Publish Date Asc</option>
+                <option value="2">Sort A-Z</option>
+                <option value="3">Sort Z-A</option>
+              </select>
             <p>{story.GSPUSStoryHelper._resultCount(filteredStories)}</p>
           </div>
           </div>
@@ -256,19 +256,30 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     return(
       <div className={styles.item}>
         <img src={item.Image['serverRelativeUrl']} alt=""/>
-        <a className="itemTitle" href={item.URL}>{item.Title}</a>
-        <p className="itemDate"><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
-        <p className="itemPartner"><strong>PARTNER:</strong> {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
-        <p className="itemIndusty"><strong>INDUSTRY:</strong> {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
-        <p className="itemSolution"><strong>SOLUTION:</strong> {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
-        <p className="itemType"><strong>STORY TYPE:</strong> {item.StoryType}</p>
+        <a className={styles.itemTitle} href={item.URL}>{item.Title}</a>
+        <p className={styles.itemDate}><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
+        <p className={styles.itemPartner}><strong>PARTNER:</strong> {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
+        <p className={styles.itemIndustry}><strong>INDUSTRY:</strong> {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
+        <p className={styles.itemSolution}><strong>SOLUTION:</strong> {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
+        <p className={styles.itemType}><strong>STORY TYPE:</strong> {item.StoryType}</p>
         <div className={styles.viewBtn}> <a className={styles.viewStory} href={item.URL}>View Story <ChevronRightIcon /></a></div>
       </div>
     );
   }
 
-  public  toggleFilters(){
-    document.getElementById("filters").classList.toggle(styles.show);
+  public  showFilters(e){
+    document.getElementById("filters").classList.add(styles.show);
+  }
+
+  public  hideFilters(e){
+    if (document.getElementById('filters').contains(e.target)){
+      // Clicked in box
+      console.log('in box');
+    } else{
+      // Clicked outside the box
+      console.log('outside box');
+      document.getElementById("filters").classList.remove(styles.show);
+    }
   }
 
 }

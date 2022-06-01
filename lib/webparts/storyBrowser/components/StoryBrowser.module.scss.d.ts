@@ -24,11 +24,11 @@ declare const styles: {
     item: string;
     viewStory: string;
     itemTitle: string;
-    itemDate: string;
     itemSolution: string;
     itemPartner: string;
     itemIndustry: string;
     itemType: string;
+    itemDate: string;
     itemList: string;
     filterContainer: string;
 };

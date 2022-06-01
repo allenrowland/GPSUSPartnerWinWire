@@ -27,13 +27,15 @@ export default class FilterGroup extends React.Component<IFilterGroupProps, IFil
                 <ul>
                 {filterOptions.map((filterValue) => (
                         <li>
+                            <label>
                             <input type="checkbox" 
                                 value={filterValue.Value + '|' + groupName}
                                 checked={activeFilters.indexOf(filterValue.Value + '|' + groupName) > -1}
                                 onChange={this.onChange}
                                 
                             />
-                            {filterValue.Value}
+                            <span>{filterValue.Value}</span>
+                            </label>
                         </li>
                     ))} 
                 </ul>
