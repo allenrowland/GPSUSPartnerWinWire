@@ -256,13 +256,13 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     return(
       <div className={styles.item}>
         <img src={item.Image['serverRelativeUrl']} alt=""/>
-        <a className={styles.itemTitle} href={item.URL}>{item.Title}</a>
+        <a className={styles.itemTitle} href={item.URL + (item.Download == "Yes" ? "&download=1" : "")} target="_blank">{item.Title}</a>
         <p className={styles.itemDate}><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
         <p className={styles.itemPartner}><strong>PARTNER:</strong> {story.GSPUSStoryHelper._listAll(item.Partner)}</p>
         <p className={styles.itemIndustry}><strong>INDUSTRY:</strong> {story.GSPUSStoryHelper._listAll(item.Industry)}</p>
         <p className={styles.itemSolution}><strong>SOLUTION:</strong> {story.GSPUSStoryHelper._listAll(item.SolutionArea)}</p>
         <p className={styles.itemType}><strong>STORY TYPE:</strong> {item.StoryType}</p>
-        <div className={styles.viewBtn}> <a className={styles.viewStory} href={item.URL}>View Story <ChevronRightIcon /></a></div>
+        <div className={styles.viewBtn}> <a className={styles.viewStory} href={item.URL + (item.Download == "Yes" ? "&download=1" : "")} target="_blank">View Story <ChevronRightIcon /></a></div>
       </div>
     );
   }

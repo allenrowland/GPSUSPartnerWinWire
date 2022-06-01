@@ -28,6 +28,7 @@ export interface Story {
         Element: string;
     };
     Featured: string;
+    Download: string;
 }
 export interface SPList {
     Title: string;

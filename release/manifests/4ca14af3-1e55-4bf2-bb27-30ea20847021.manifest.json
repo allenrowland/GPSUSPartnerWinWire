@@ -39,7 +39,7 @@
     "scriptResources": {
       "story-browser-web-part": {
         "type": "path",
-        "path": "story-browser-web-part_ff324319a50a97a38457.js"
+        "path": "story-browser-web-part_4f773a5c17348f8c19c1.js"
       },
       "@microsoft/sp-property-pane": {
         "type": "component",
@@ -48,7 +48,7 @@
       },
       "StoryBrowserWebPartStrings": {
         "type": "path",
-        "path": "StoryBrowserWebPartStrings_en-us_7b6d95bb3677f38996bbb2dfdc5366a4.js"
+        "path": "StoryBrowserWebPartStrings_en-us_d7d81937bb0a61debfdd46b670a3f1cc.js"
       },
       "@microsoft/sp-core-library": {
         "type": "component",
