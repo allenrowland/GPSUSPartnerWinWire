@@ -25,6 +25,7 @@ import {
 export interface IStoryBrowserWebPartProps {
   description: string;
   ListGUID: string;
+  GroupID: string;
 }
 
 import { sp } from "@pnp/sp/presets/all";  
@@ -34,6 +35,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   private _stories: story.Story[];
   private _filters: wwfilters.Filter[] = [];
   private _lists: IPropertyPaneDropdownOption[];
+  private _groups: IPropertyPaneDropdownOption[];
 
   protected onInit(): Promise<void> {
 
@@ -48,30 +50,35 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
       //Get all Lists for configuration
       this.getLists().then(listResolve =>{
       this._lists = listResolve as IPropertyPaneDropdownOption[];
-      
-      //Get User Permissions
-      this._getInteralUser().then(internalPermission =>{
-        this.isInternal = internalPermission as boolean;
         
-        //Get Filter Choices
-        this._getfieldChoices().then((fieldResponse) => {
+        //Get all groups for configuration
+        this.getGroups().then(groupResolve =>{
+        this._groups = groupResolve as IPropertyPaneDropdownOption[];
+      
+        //Get User Permissions
+        this._getInteralUser().then(internalPermission =>{
+          this.isInternal = internalPermission as boolean;
+          
+          //Get Filter Choices
+          this._getfieldChoices().then((fieldResponse) => {
 
-          //Get Initial List
-          this._getSearchData(search).then(response => {
-            this._stories = response as story.Story[];
+            //Get Initial List
+            this._getSearchData(search).then(response => {
+              this._stories = response as story.Story[];
 
-            console.log(this._stories);
-            
-            const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
-              stories: this._stories,
-              filters: this._filters
+              console.log(this._stories);
+              
+              const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
+                stories: this._stories,
+                filters: this._filters
+              });
+              ReactDom.render(element, this.domElement);
+              });
             });
-            ReactDom.render(element, this.domElement);
-            });
+            return true;
           });
-          return true;
-        });
-      });     
+        });   
+      });    
       
   }
 
@@ -95,9 +102,14 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
               groupName: strings.BasicGroupName,
               groupFields: [ 
                 PropertyPaneDropdown('ListGUID', {
-                  label:'List ID (GUID)',
+                  label:'List Name',
                   options: this._lists,
                   selectedKey: this.properties.ListGUID
+                }),
+                PropertyPaneDropdown('GroupID', {
+                  label:'Internal Group Name',
+                  options: this._groups,
+                  selectedKey: this.properties.GroupID
                 })
               ]
             }
@@ -113,6 +125,26 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     });    
     return new Promise((resolve) => {
       sp.web.lists.get().then(result =>{   
+        let options :IPropertyPaneDropdownOption[] = [];
+        result.forEach(item =>{
+          let option :IPropertyPaneDropdownOption = {
+            key: item.Id,
+            text: item.Title
+          };
+
+          options.push(option);
+        });
+        resolve(options);
+      });
+    });
+  }
+
+  private getGroups(){
+    sp.setup({
+      spfxContext: this.context
+    });    
+    return new Promise((resolve) => {
+      sp.web.siteGroups.get().then(result =>{   
         let options :IPropertyPaneDropdownOption[] = [];
         result.forEach(item =>{
           let option :IPropertyPaneDropdownOption = {
@@ -256,7 +288,8 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
              var internal = false;
 
              groups.forEach(group => {
-                 if (group.Title == "Internal Users") {                   
+                  console.log(group.Id + " " + this.properties.GroupID);
+                 if (group.Id == this.properties.GroupID) {                   
                      internal = true;
                  }
              });

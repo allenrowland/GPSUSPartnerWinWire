@@ -2,6 +2,7 @@ declare interface IStoryBrowserWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   ListGUID: string;
+  GroupID: string;
 }
 
 declare module 'StoryBrowserWebPartStrings' {

@@ -5,17 +5,20 @@ import * as wwfilters from '../Filters';
 export interface IStoryBrowserWebPartProps {
     description: string;
     ListGUID: string;
+    GroupID: string;
 }
 export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBrowserWebPartProps> {
     private _stories;
     private _filters;
     private _lists;
+    private _groups;
     protected onInit(): Promise<void>;
     render(search?: wwfilters.Search): void;
     protected onDispose(): void;
     protected get dataVersion(): Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
     private getLists;
+    private getGroups;
     private isInternal;
     private _getfieldChoices;
     private _getSearchData;
