@@ -34,7 +34,7 @@ export default class FilterGroup extends React.Component<IFilterGroupProps, IFil
                                 onChange={this.onChange}
                                 
                             />
-                            <span>{filterValue.Value}</span>
+                            <div>{filterValue.Value}</div>
                             </label>
                         </li>
                     ))} 
