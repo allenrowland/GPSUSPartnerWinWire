@@ -9,7 +9,7 @@
   display: block;
   max-width: 1140px;
   margin: auto;
-  @media all and (max-width: 1200px) {
+  @media all and (max-width: 1260px) {
     max-width: 740px;
   }
 }
@@ -239,11 +239,22 @@ margin-right:20px;
 .filterOptions{
   display:flex;
   flex-direction:row;
+  label {
+    line-height: 25px;
+    input {
+      margin-right: 5px;
+    }
+    > div {
+      width: calc(100%-40px);
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
 }
 .featuredItems{
   max-width:100%;
   margin:auto;
-  background:#F5F5F5;
+  // background:#F5F5F5;
   border-bottom: 1px solid #E7E7E7;
   margin-bottom: 40px;
 }
@@ -292,9 +303,9 @@ margin-right:20px;
   // padding:20px; MEBF no
   // padding-left:60px; MEBF no
   justify-content: space-between;
-  gap: 90px;
+  gap: 20px 90px;
   @media all and (max-width:1400px){
-    gap: 30px;
+    gap: 10px 30px;
   }
   &:after {
     content: "";
@@ -406,7 +417,7 @@ input[type=checkbox] {
 background:#F1F1F1;
 border:1px solid #F1F1F1;
 }
-@media all and (max-width:1200px){
+@media all and (max-width:1260px){
   .filtersContainer {
     .sortResults {
       margin-left: unset;
