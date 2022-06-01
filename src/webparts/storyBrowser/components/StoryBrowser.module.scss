@@ -1,5 +1,15 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
-
+:global {
+  #workbenchPageContent,
+  .CanvasComponent.LCS .CanvasZone {
+    max-width: 100% !important;
+  }
+}
+.storyBrowser {
+  display: block;
+  max-width: 1140px;
+  margin: auto;
+}
 .storyBrowser input{
   font-family:Segoe UI, Arial, sans-serif;
   border:0px;
@@ -45,24 +55,22 @@ body{
   
 }
 #filters{
-  width:1080px;
+  width:1142px;
   margin:auto;
   display:flex;
   flex-wrap:wrap;
   flex-direction:row;
   margin-top:30px;
   margin-bottom:30px;
+  max-width: 100%;
 }
 .filtersContainer{
-
-
+  width: 1142px;
   display:flex;
   flex-wrap:wrap;
   flex-direction:row;
   margin-top:30px;
-  margin-bottom:30px;
   max-width:100%;
-  margin-left:20px;
 }
 .filtersContainer ul{
   list-style: none;
@@ -78,6 +86,7 @@ body{
 }
 .filtersSearch i{
   margin-left:-30px!important;
+  transform: scaleX(-1);
 }
 .partnerSearch::placeholder{
   color:#333!important;
@@ -101,16 +110,15 @@ body{
   background-repeat: no-repeat;
   background-position: 100%;
   margin-right: 20px;
-  padding: 12px 20px;
-    padding-left: 20px;
+  padding: 5px 20px;
+  padding-left: 20px;
   max-width: 100%;
   font-size: 17px;
+  line-height: 22px;
   color: #333;
-  margin-bottom: -5px !important;
-  margin-top: 5px;
+  // margin-bottom: -5px !important;
   padding-left: 0px;
   border-bottom:0px;
-
 }
 .activate:hover{
   cursor:pointer;
@@ -118,15 +126,17 @@ body{
 .filtersSearch{
   background-repeat: no-repeat;
   background-position: right;
-  border-bottom: 2px solid #0078D7;
+  border-bottom: 1px solid #0078D7;
   margin-right:20px;
-  padding:10px 20px;
+  padding:0px 20px;
   max-width:100%;
   padding-left:0px;
+  height: 100%;
 }
 .filtersSearch input{
-  font-size:17px;
-
+  font-size: 17px;
+  line-height: 22px;
+  height: 32px;
 }
 .filtersSearch input::placeholder{
   color:#333;
@@ -134,15 +144,15 @@ body{
 }
 
 .filtersDropdown{
-  border-bottom: 2px solid #0078D7;
+  border-bottom: 1px solid #0078D7;
   margin-right:20px;
-  margin-left:60px;
-  font-size:16px;
+  // margin-left:60px;
+  font-size:17px;
   font-family:Segoe UI, Arial, sans-serif;
   position:relative;
+  height: 100%;
 }
 .filtersSearch input{
-  height:100%;
   width:230px;
 }
 .filtersDropdown .filters{
@@ -176,7 +186,7 @@ padding-bottom:40px;
 -ms-animation: fadeIn .5s;
 flex-direction:column;
 background:#FFF;
-width:380px;
+width:500px;
 top:50px;
 z-index:9999;
 }
@@ -204,9 +214,9 @@ z-index:9999;
   margin-bottom:14px;
   background:none;
   border:0px;
-  max-width:100px;
+  max-width:200px;
   font-size:17px;
-
+  text-align: left;
 }
 .uncheck:hover{
 cursor:pointer;
@@ -228,24 +238,22 @@ margin-right:20px;
   flex-direction:row;
 }
 .featuredItems{
- 
   max-width:100%;
   margin:auto;
   background:#F5F5F5;
- 
- 
+  border-bottom: 1px solid #E7E7E7;
+  margin-bottom: 40px;
 }
 .featuredItems h4{
   font-family: Segoe UI,Arial,sans-serif;
   font-size: 22px;
   font-weight: 400;
-  padding-left: 20px;
-  margin-bottom: 0;
+  // padding-left: 20px;
+  margin-bottom: 20px;
   margin-top: 20px;
-  margin-left: 60px;
+  // margin-left: 60px;
   display: block;
   padding-top: 30px;
-  margin-bottom: -15px;
 }
 .filtersContainer .sortResults{
   border:0px;
@@ -253,7 +261,12 @@ margin-right:20px;
   font-family:Segoe UI, Arial, sans-serif;
   display:flex;
   margin-left:auto;
-  margin-right:70px;
+  // margin-right:70px; MDBF: Why?
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 35px;
+  }
 }
 .sortBtn{
   background:none;
@@ -262,17 +275,25 @@ margin-right:20px;
   font-size:17px;
   font-family:Segoe UI, Arial, sans-serif;
   margin-right:20px;
+  //-moz-appearance:none; /* Firefox */
+  // -webkit-appearance:none; /* Safari and Chrome */
+  // appearance:none;
 }
 .items{
   display:flex;
-  width: 1080px;
+  width: 1142px;
   
   flex-direction:row;
   flex-wrap:wrap;
   max-width:100%;
-  padding:20px;
-  padding-left:60px;
-
+  // padding:20px; MEBF no
+  // padding-left:60px; MEBF no
+  justify-content: space-between;
+  gap: 91px;
+  &:after {
+    content: "";
+    flex: auto;
+  }
 }
 .viewBtn i{
   font-size:12px;
@@ -294,15 +315,7 @@ margin-right:20px;
  display:flex;
  flex-direction:column;
 max-width:320px;
-padding:20px;
-}
-.viewStory{
-  text-decoration:none;
-  font-family:Segoe UI, Arial, sans-serif;
-  font-size:17px;
-  font-weight:bold;
-  margin-top:20px;
-  color:#0078D7;
+padding-bottom:20px;
 }
 .item img{
   margin-bottom:16px;
@@ -312,13 +325,24 @@ padding:20px;
   font-weight:bold;
  
 }
-.item a{
-  font-weight:600;
-  font-family:Segoe UI, Arial, sans-serif;
-  font-size:18px;
-  text-decoration:none;
-  color:#0078D7;
-  margin-bottom:12px;
+.item{
+  a{
+    font-weight:600;
+    font-family:Segoe UI, Arial, sans-serif;
+    font-size:18px;
+    text-decoration:none;
+    color:#0078D7;
+    margin-bottom:12px;
+    &.viewStory{
+      text-decoration:none;
+      font-family:Segoe UI, Arial, sans-serif;
+      font-size:15px;
+      font-weight:600;
+      line-height: 20px;
+      margin-top:20px;
+      color:#0078D7;
+    }
+  }
 }
 .item strong{
   font-weight:600;
@@ -334,11 +358,6 @@ padding:20px;
 .item{
   color:#707070!important;
 }
-.itemDate{
-  background:none;
-  font-size:16px!important;
-  color:#000!important;
-}
 .itemSolution{
   background:none;
 }
@@ -351,12 +370,6 @@ padding:20px;
 .itemType{
   background:none;
 }
-.item p{
-  font-family:Segoe UI, Arial, sans-serif;
-  font-size:15px;
-  line-height:22px;
-  margin:0px;
-}
 i[data-icon-name="Search"]{
   font-size: 14px;
   margin-left: 8px;
@@ -365,16 +378,34 @@ i[data-icon-name="ChevronDown"]{
   font-size: 14px;
   margin-left: 8px;
 }
-.item .itemDate strong{
-  color:#000!important;
-  font-size:16px!important;
-}
+.item{
+  p{
+    font-family:Segoe UI, Arial, sans-serif;
+    font-size:15px;
+    line-height:22px;
+    margin:0px;
+    &.itemDate {
+      strong{
+        color:#000;
+        font-size:16px;
+      }
+    }
+  }
+} 
 .itemList{
   padding:20px;
 }
 input[type=checkbox] {  
 background:#F1F1F1;
 border:1px solid #F1F1F1;
+}
+@media all and (max-width:1000px){
+  .filtersContainer {
+    .sortResults {
+      margin-left: unset;
+      margin-top: 10px;
+    }
+  }
 }
 @media all and (max-width:800px){
   .item{
@@ -429,7 +460,7 @@ border:1px solid #F1F1F1;
     border:0px;
   }
   .activate{
-    border-bottom:2px solid #0078d7;
+    border-bottom:1px solid #0078d7;
   }
 }
 @media all and (max-width:700px){
