@@ -17,7 +17,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     private stories;
     onClearAllClick: () => void;
     private storyCard;
-    showFilters(e: any): void;
+    toggleFilters(e: any): void;
     hideFilters(e: any): void;
 }
 //# sourceMappingURL=StoryBrowser.d.ts.map

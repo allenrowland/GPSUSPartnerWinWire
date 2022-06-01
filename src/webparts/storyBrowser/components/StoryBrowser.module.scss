@@ -9,6 +9,9 @@
   display: block;
   max-width: 1140px;
   margin: auto;
+  @media all and (max-width: 1200px) {
+    max-width: 740px;
+  }
 }
 .storyBrowser input{
   font-family:Segoe UI, Arial, sans-serif;
@@ -289,10 +292,14 @@ margin-right:20px;
   // padding:20px; MEBF no
   // padding-left:60px; MEBF no
   justify-content: space-between;
-  gap: 91px;
+  gap: 90px;
+  @media all and (max-width:1400px){
+    gap: 30px;
+  }
   &:after {
     content: "";
     flex: auto;
+    width: 320px;
   }
 }
 .viewBtn i{
@@ -399,13 +406,19 @@ input[type=checkbox] {
 background:#F1F1F1;
 border:1px solid #F1F1F1;
 }
-@media all and (max-width:1000px){
+@media all and (max-width:1200px){
   .filtersContainer {
     .sortResults {
       margin-left: unset;
       margin-top: 10px;
+      width: 100%;
     }
-  }
+    .filtersDropdown{
+      .activate {
+        margin-right: 0;
+      }
+    }
+}
 }
 @media all and (max-width:800px){
   .item{
@@ -433,6 +446,7 @@ border:1px solid #F1F1F1;
     width:100%;
     margin:0px;
     margin-bottom:20px;
+    padding: 1px;
   }
   .filtersSearch{
     width:100%;
@@ -450,7 +464,6 @@ border:1px solid #F1F1F1;
   }
   .featuredItems h4{
     margin:0px;
-    margin-left:15px;
     margin-bottom:20px;
   }
   .uncheck{

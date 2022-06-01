@@ -49,7 +49,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
       <section id="storyBrowser" className={styles.storyBrowser} onClick={this.hideFilters}>
         <div id="filters"  className={styles.filtersContainer}>
           <div className={styles.filtersDropdown}>
-            <div onClick={this.showFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
+            <div onClick={this.toggleFilters} className={styles.activate}>Filter your results <ChevronDownIcon /></div>
         
             <div className={styles.filters}>
             <button type="button" className={styles.uncheck} onClick={this.onClearAllClick}>Uncheck All</button>                 
@@ -267,8 +267,8 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     );
   }
 
-  public  showFilters(e){
-    document.getElementById("filters").classList.add(styles.show);
+  public  toggleFilters(e){
+    document.getElementById("filters").classList.toggle(styles.show);
   }
 
   public  hideFilters(e){
