@@ -13,7 +13,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     private filterStories;
     handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleSortChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-    onSubmissionTypeFilterChange: (filter: string, isActive: boolean) => void;
+    onSubmissionTypeFilterChange: (cfilter: string, isActive: boolean) => void;
     private stories;
     onClearAllClick: () => void;
     private storyCard;

@@ -5,6 +5,7 @@ import * as story from '../../Story';
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import { Icon } from '@fluentui/react/lib/Icon';
 import FilterGroup from '../components/FilterGroup';
+import { filter } from 'lodash';
 initializeIcons();
 const ChevronDownIcon = () => <Icon iconName="ChevronDown" />;
 const SearchIcon = () => <Icon iconName="Search" />;
@@ -29,7 +30,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     this.state = {
       _storyBrowserStateFilters: [],
       _storyBrowserStateSearchTerm: '',
-      _storyBrowserStateSort: '0',
+      _storyBrowserStateSort: '0'
     };
   }
 
@@ -40,10 +41,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     } = this.props;
 
     let filteredStories = this.filterStories(this.props.stories);
-    let featuredStories: story.Story[] = filteredStories.filter(item => item.Featured == "Yes");
-    let otherStories: story.Story[] = filteredStories.filter(item => item.Featured != "Yes");
-
-    console.log(this.props.filters);
+    let featuredStories: story.Story[] = filteredStories.filter(item => item.Featured == "Yes").slice(0, 3);
 
     return (
       <section id="storyBrowser" className={styles.storyBrowser} onClick={this.hideFilters}>
@@ -69,6 +67,13 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
                       title = {'Solution Area'}
                       groupName={'SolutionArea'}
                       filterOptions={this.props.filters.filter(item => item.Field == 'SolutionArea')}
+                      onChange={this.onSubmissionTypeFilterChange}
+                      activeFilters={this.state._storyBrowserStateFilters}
+                    />
+                    <FilterGroup
+                      title={'File Type'}
+                      groupName={'LinkType'}
+                      filterOptions={this.props.filters.filter(item => item.Field == 'LinkType')}
                       onChange={this.onSubmissionTypeFilterChange}
                       activeFilters={this.state._storyBrowserStateFilters}
                     />
@@ -99,7 +104,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
                 </div>
               </div>
             </div>
-            <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by partner name" type="text" name="namesearch" onChange={this.handleSearchChange} value={this.state._storyBrowserStateSearchTerm != '' ? this.state._storyBrowserStateSearchTerm : null}  /> <SearchIcon/> </div>
+            <div className={styles.filtersSearch}><input style={inputStyle} placeholder="Search by keyword" type="text" name="namesearch" onChange={this.handleSearchChange} value={this.state._storyBrowserStateSearchTerm != '' ? this.state._storyBrowserStateSearchTerm : null}  /> <SearchIcon/> </div>
           <div className={styles.sortResults}>
               <select className={styles.sortBtn} value={this.state._storyBrowserStateSort} onChange={this.handleSortChange}>
                 <option value="0">Sort Publish Date Desc</option>
@@ -112,7 +117,7 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
           </div>
          
           {this.stories(featuredStories, true)}
-          {this.stories(otherStories)}
+          {this.stories(filteredStories)}
 
       </section>
     );
@@ -127,7 +132,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
 
   private compareDate(story1 :story.Story, story2: story.Story, key: string) 
   {
-    console.log('story1: ' + Date.parse(story1[key]) + ' story2: ' + Date.parse(story2[key]));
     if (Date.parse(story1[key]) > Date.parse(story2[key])) return 1;
     if (Date.parse(story1[key]) < Date.parse(story2[key])) return -1;
     return 0;
@@ -162,7 +166,18 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
           if(partners[i].toLowerCase().indexOf((this.state._storyBrowserStateSearchTerm).toLowerCase()) > -1){
             pushStory = true;
           }
+        }       
+        
+        let tags :string[] = typeof(storyItem['Tags']) == "string" ? ['Tags'] : (Object)(storyItem['Tags']);
+        for (const i in tags){
+          if(tags[i].toLowerCase().indexOf((this.state._storyBrowserStateSearchTerm).toLowerCase()) > -1){
+            pushStory = true;
+          }
         }  
+
+        if(storyItem.Title.toLowerCase().indexOf((this.state._storyBrowserStateSearchTerm).toLowerCase()) > -1){
+          pushStory = true;
+        }
 
         if(pushStory){
           queriedStories.push(storyItem);
@@ -177,19 +192,23 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
       
       
       stories.forEach(storyItem => {
-        let pushStory = false;
+        //let pushStory = false; (OR)
+        let filterMatches = 0; //(AND)
+
         cfilters.forEach(filterItem => {
-          let filter = filterItem.split('|')[0];
+          let cfilter = filterItem.split('|')[0];
           let group = filterItem.split('|')[1];
           let storyFilters :string[] = typeof(storyItem[group]) == "string" ? [storyItem[group]] : (Object)(storyItem[group]);
           for (const i in storyFilters){
-            if(filter == storyFilters[i]){
-              pushStory = true;
+            if(cfilter == storyFilters[i]){
+              //pushStory = true; (OR)
+              filterMatches++; //(AND)
             }
           }         
         });
 
-        if(pushStory){
+        //if(pushStory){ (OR)
+        if(filterMatches == cfilters.length){ //(AND)
           filteredStories.push(storyItem);
         }
       });
@@ -210,10 +229,10 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
     this.setState({_storyBrowserStateSort: sortValue});
   }
 
-  public onSubmissionTypeFilterChange = (filter: string, isActive: boolean) => {
-    const currentFilters = this.state._storyBrowserStateFilters.filter((item) => item !== filter);
+  public onSubmissionTypeFilterChange = (cfilter: string, isActive: boolean) => {
+    const currentFilters = this.state._storyBrowserStateFilters.filter((item) => item !== cfilter);
     if (isActive) {
-      currentFilters.push(filter);
+      currentFilters.push(cfilter);
     }
     
     this.setState({_storyBrowserStateFilters: currentFilters});
@@ -221,7 +240,8 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
 
   private stories(items: story.Story[], featured: boolean = false): React.ReactElement{
 
-    if(items == null || items.length < 1){
+    //remove featured section if filters applied or there are no stories to show
+    if(items == null || items.length < 1 || (featured && this.state._storyBrowserStateFilters.length > 0)){
       return (null);
     }
     return(
@@ -252,7 +272,6 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
   }
 
   private storyCard(item: story.Story): React.ReactElement{
-    console.log(item.URL);
     return(
       <div className={styles.item}>
         <img src={item.Image['serverRelativeUrl']} alt=""/>

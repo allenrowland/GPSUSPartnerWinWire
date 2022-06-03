@@ -56,8 +56,8 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
         this._groups = groupResolve as IPropertyPaneDropdownOption[];
       
         //Get User Permissions
-        this._getInteralUser().then(internalPermission =>{
-          this.isInternal = internalPermission as boolean;
+        /*this._getInteralUser().then(internalPermission =>{
+          this.isInternal = internalPermission as boolean;*/
           
           //Get Filter Choices
           this._getfieldChoices().then((fieldResponse) => {
@@ -65,8 +65,6 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
             //Get Initial List
             this._getSearchData(search).then(response => {
               this._stories = response as story.Story[];
-
-              console.log(this._stories);
               
               const element: React.ReactElement<IStoryBrowserProps> = React.createElement(StoryBrowser, {
                 stories: this._stories,
@@ -76,7 +74,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
               });
             });
             return true;
-          });
+          //});
         });   
       });    
       
@@ -105,12 +103,12 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
                   label:'List Name',
                   options: this._lists,
                   selectedKey: this.properties.ListGUID
-                }),
+                })/*,
                 PropertyPaneDropdown('GroupID', {
                   label:'Internal Group Name',
                   options: this._groups,
                   selectedKey: this.properties.GroupID
-                })
+                })*/
               ]
             }
           ]
@@ -222,8 +220,19 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
                     IsChecked: true
                   });
                 });
-
-                resolve(true);
+              
+                let linkType = list.fields.getByInternalNameOrTitle('LinkType');
+                linkType.select('Choices').get().then((ltoptions) => {  
+                  ltoptions['Choices'].forEach(item => {
+                    this._filters.push({
+                      Field: 'LinkType',
+                      Value: item,
+                      IsChecked: true
+                    });
+                  });
+                  
+                  resolve(true);
+                });
               });
             });
           });
@@ -240,20 +249,29 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     });  
 
     let searchURI = '?InplaceSearchQuery=' + encodeURIComponent(search.Keyword != null ? search.Keyword : '');    
-    let sortURI = '&SortField=PublishDate&SortDir=Desc';
+    let sortURI = '&SortField=PublishDate&SortDir=Desc'; 
+    let filterURI = '&FilterField1=Hide&FilterValue1=0';
 
     /*if(search.Sort != null && search.Sort.Value == 1){
       sortURI = '&SortField=Title&SortDir=Asc';
     }*/
     
     return new Promise((resolve) => {
-      const restAPI = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists(guid'${this.properties.ListGUID}')/RenderListDataAsStream` +searchURI + sortURI;
+      const restAPI = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists(guid'${this.properties.ListGUID}')/RenderListDataAsStream` +searchURI + sortURI + filterURI;
       
       return this.context.spHttpClient.post(restAPI, SPHttpClient.configurations.v1, {
         body: JSON.stringify({
           parameters: {          
             ViewXml: `
               <View>
+                <Query>
+                  <Where>
+                      <Leq>
+                        <FieldRef Name='PublishDate' />
+                        <Value IncludeTimeValue='False' Type='DateTime'><Today /></Value>
+                      </Leq>
+                  </Where>
+                </Query>
                 <RowLimit Paged="TRUE">5000</RowLimit>
               </View>
             `
@@ -265,10 +283,11 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
           response.json().then(items => {
           
             let filteredResults = items.Row;
-            if(!this.isInternal){  
-              //USER DOES NOT HAVE PERMISSION TO VIEW INTERNAL STORIES        
+            /*if(!this.isInternal){  
+              //USER DOES NOT HAVE PERMISSION TO VIEW INTERNAL STORIES       
+              console.log(items) 
               filteredResults = filteredResults.filter(item => item['StoryType'] == 'External Case Study');
-            }
+            }*/
             resolve(JSON.parse(JSON.stringify(filteredResults)));
 
           });
@@ -288,7 +307,6 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
              var internal = false;
 
              groups.forEach(group => {
-                  console.log(group.Id + " " + this.properties.GroupID);
                  if (group.Id == this.properties.GroupID) {                   
                      internal = true;
                  }
