@@ -39,7 +39,7 @@
     "scriptResources": {
       "story-browser-web-part": {
         "type": "path",
-        "path": "story-browser-web-part_214574de6f5577523c07.js"
+        "path": "story-browser-web-part_2000a7bddff14e8c6cfc.js"
       },
       "@microsoft/sp-property-pane": {
         "type": "component",
