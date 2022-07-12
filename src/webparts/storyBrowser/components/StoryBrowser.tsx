@@ -293,10 +293,10 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
   public  hideFilters(e){
     if (document.getElementById('filters').contains(e.target)){
       // Clicked in box
-      console.log('in box');
+      // console.log('in box');
     } else{
       // Clicked outside the box
-      console.log('outside box');
+      // console.log('outside box');
       document.getElementById("filters").classList.remove(styles.show);
     }
   }
