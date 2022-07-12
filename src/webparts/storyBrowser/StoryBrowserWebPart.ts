@@ -19,7 +19,8 @@ import * as wwfilters from '../Filters';
 
 import {
   SPHttpClient,
-  SPHttpClientResponse   
+  SPHttpClientResponse,
+  ISPHttpClientOptions   
 } from '@microsoft/sp-http';
 
 export interface IStoryBrowserWebPartProps {
@@ -36,6 +37,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   private _filters: wwfilters.Filter[] = [];
   private _lists: IPropertyPaneDropdownOption[];
   private _groups: IPropertyPaneDropdownOption[];
+  private version: string = '1.0.0.20';
 
   protected onInit(): Promise<void> {
 
@@ -244,6 +246,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   
   private _getSearchData(search :wwfilters.Search)
   {
+
     sp.setup({
       spfxContext: this.context
     });  
@@ -276,7 +279,11 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
               </View>
             `
           }
-        })
+        }),
+        headers: {
+          "UserAgent": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version,
+          "X-ClientTag": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version
+        } 
       })
       .then((response: SPHttpClientResponse) => 
          {
@@ -298,9 +305,17 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
 
   private _getInteralUser()
 {
+
+  const opts : ISPHttpClientOptions  = {
+    headers: {
+      "UserAgent": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version,
+      "X-ClientTag": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version
+    }    
+  };
+
   return new Promise((resolve) => {
    this.context.spHttpClient.get(this.context.pageContext.web.absoluteUrl + "/_api/web/currentuser/groups",
-         SPHttpClient.configurations.v1)
+         SPHttpClient.configurations.v1, opts)
      .then((groupResponse: SPHttpClientResponse) => {
          groupResponse.json().then((groupsData: any) => {
              var groups = groupsData.value;
