@@ -38,6 +38,7 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
   private _lists: IPropertyPaneDropdownOption[];
   private _groups: IPropertyPaneDropdownOption[];
   private version: string = '1.0.0.20';
+  private appID: string = 'fd82a395-e968-65af-ba0a-36c4051fa5ca';
 
   protected onInit(): Promise<void> {
 
@@ -281,8 +282,8 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
           }
         }),
         headers: {
-          "UserAgent": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version,
-          "X-ClientTag": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version
+          "UserAgent": "NONISV|Microsoft|" + this.appID + "/" + this.version,
+          "X-ClientTag": "NONISV|Microsoft|" + this.appID + "/" + this.version
         } 
       })
       .then((response: SPHttpClientResponse) => 
@@ -308,8 +309,8 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
 
   const opts : ISPHttpClientOptions  = {
     headers: {
-      "UserAgent": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version,
-      "X-ClientTag": "NONISV|Microsoft|fd82a395-e968-65af-ba0a-36c4051fa5ca/" + this.version
+      "UserAgent": "NONISV|Microsoft|" + this.appID + "/" + this.version,
+      "X-ClientTag": "NONISV|Microsoft|" + this.appID + "/" + this.version
     }    
   };
 
