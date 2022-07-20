@@ -12,6 +12,8 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
     private _filters;
     private _lists;
     private _groups;
+    private version;
+    private appID;
     protected onInit(): Promise<void>;
     render(search?: wwfilters.Search): void;
     protected onDispose(): void;

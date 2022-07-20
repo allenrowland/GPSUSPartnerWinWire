@@ -122,8 +122,14 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
 
   private getLists(){
     sp.setup({
-      spfxContext: this.context
-    });    
+      spfxContext: this.context,
+      sp: {
+        headers: {
+          "UserAgent": "NONISV|Microsoft|" + this.appID + "/" + this.version,
+          "X-ClientTag": "NONISV|Microsoft|" + this.appID + "/" + this.version
+        }
+      } 
+    });   
     return new Promise((resolve) => {
       sp.web.lists.get().then(result =>{   
         let options :IPropertyPaneDropdownOption[] = [];
@@ -142,8 +148,14 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
 
   private getGroups(){
     sp.setup({
-      spfxContext: this.context
-    });    
+      spfxContext: this.context,
+      sp: {
+        headers: {
+          "UserAgent": "NONISV|Microsoft|" + this.appID + "/" + this.version,
+          "X-ClientTag": "NONISV|Microsoft|" + this.appID + "/" + this.version
+        }
+      } 
+    });   
     return new Promise((resolve) => {
       sp.web.siteGroups.get().then(result =>{   
         let options :IPropertyPaneDropdownOption[] = [];
@@ -166,7 +178,13 @@ export default class StoryBrowserWebPart extends BaseClientSideWebPart<IStoryBro
 
   private _getfieldChoices(){
     sp.setup({
-      spfxContext: this.context
+      spfxContext: this.context,
+      sp: {
+        headers: {
+          "UserAgent": "NONISV|Microsoft|" + this.appID + "/" + this.version,
+          "X-ClientTag": "NONISV|Microsoft|" + this.appID + "/" + this.version
+        }
+      } 
     });    
 
     return new Promise((resolve) => {
