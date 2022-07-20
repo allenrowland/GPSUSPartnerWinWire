@@ -29,6 +29,7 @@ declare const styles: {
     itemIndustry: string;
     itemType: string;
     itemDate: string;
+    image: string;
     itemList: string;
     filterContainer: string;
 };
