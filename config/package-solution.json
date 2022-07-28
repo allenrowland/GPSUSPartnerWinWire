@@ -3,7 +3,7 @@
   "solution": {
     "name": "gpsus-partner-win-stories-client-side-solution",
     "id": "fd82a395-e968-65af-ba0a-36c4051fa5ca",
-    "version": "1.0.0.20",
+    "version": "1.0.0.21",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": false,
     "isDomainIsolated": false
