@@ -274,8 +274,8 @@ export default class StoryBrowser extends React.Component<IStoryBrowserProps, IS
   private storyCard(item: story.Story): React.ReactElement{
     return(
       <div className={styles.item}>
-        <div className="image">
-          <img src={item.Image['serverRelativeUrl']} alt="{item.Title}"/>
+        <div className={styles.image}>
+          <img src={item.Image['serverRelativeUrl']} alt={item.Title}/>
         </div>
         <a className={styles.itemTitle} href={item.URL + (item.Download == "Yes" ? "&download=1" : "")} target="_blank">{item.Title}</a>
         <p className={styles.itemDate}><strong>{story.GSPUSStoryHelper._formatDate(item.PublishDate)}</strong></p>
